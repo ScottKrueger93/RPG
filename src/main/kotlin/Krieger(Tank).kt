@@ -1,0 +1,2 @@
+class `Krieger(Tank)` {
+}

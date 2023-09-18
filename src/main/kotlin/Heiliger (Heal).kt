@@ -1,0 +1,2 @@
+class `Heiliger (Heal)` {
+}
