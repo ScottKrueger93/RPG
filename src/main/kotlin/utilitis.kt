@@ -13,7 +13,7 @@ fun angreifen(held: Held) {
     } else if (held == krieger)
         krieger.angreifenKrieger(held)
 }
-}
+
 
 
 fun main(){

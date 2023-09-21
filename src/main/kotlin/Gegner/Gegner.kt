@@ -1,6 +1,7 @@
 package Gegner
 
 import Helden.Attacke
+import Helden.Faehigkeit
 import Helden.normalerAngriff
 import Helden.verteidiegung
 
@@ -8,11 +9,10 @@ open class Gegner(
     var name: String,
     var lebenspunkte: Int,
     var aktionspunkte: Int = 100,
-    val aktion1: Attacke = normalerAngriff,
-    val aktion2: Attacke = verteidiegung,
-    var aktion3: Attacke,
-    var aktion4: Attacke,
-    var ruestungsPunkte: Int = 0
-) {
+    var ruestungsPunkte: Int = 0,
+    val aktion1: Faehigkeit,
+    val aktion2: Faehigkeit,
+    var aktion3: Faehigkeit,
+    var aktion4: Faehigkeit) {
 
 }

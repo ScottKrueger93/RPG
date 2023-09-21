@@ -6,13 +6,13 @@ class Endgegner(
     name: String = "Erzbischof Ankylar des Heiligen Ordens",
     lebenspunkte: Int = 5000,
     aktionspunkte: Int = 100,
-    aktion1: Attacke = normalerAngriff,
-    aktion2: Attacke = verteidiegung,
-    aktion3: Attacke = schattenMiasmaAoE,
-    aktion4: Attacke = verseuchung,
-    aktion5: Attacke = schattenblitz,
-    aktion6: Attacke = knochenschild,
-    ruestungsPunkte: Int = 1000
-) : Gegner(name, lebenspunkte, aktionspunkte, aktion1, aktion2, aktion3, aktion4, ruestungsPunkte) {
+    ruestungsPunkte: Int = 1000,
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 50, 0, 0, 0),
+    aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 50, 0),
+    aktion3: Faehigkeit = Faehigkeit("Schatten-Miasma", 150, 0, 0, 50),
+    aktion4: Faehigkeit = Faehigkeit("Verseuchung", 10, 0, 0, 50),
+    aktion5: Faehigkeit = Faehigkeit("Schattenblitz", 350, 0, 0, 50),
+    aktion6: Faehigkeit = Faehigkeit("Knochenschild", 0, 0, 250, 30)
+) : Gegner(name, lebenspunkte, aktionspunkte,ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
 }
