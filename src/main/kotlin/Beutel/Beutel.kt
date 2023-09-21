@@ -7,7 +7,7 @@ class Beutel(
         Item("Verteidigungspille", 0, 0, 1000, 0),
         Item("AP-Trank", 0, 0, 0, 100),
         Item("Heiltrank", 0, 1000, 0, 0)
-    ),
+    )
 ) {
 
     fun itemAuswaehlen(): Item {
@@ -21,6 +21,7 @@ class Beutel(
         }
         var itemEingabe: Int = readln().toInt()
         var item = items[itemEingabe - 1]
+        items.remove(item)
         return item
     }
 }
