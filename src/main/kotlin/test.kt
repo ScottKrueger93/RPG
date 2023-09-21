@@ -22,6 +22,17 @@ fun main() {
     var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
     var hatBereitsGekaempft: MutableList<Held> = mutableListOf()
 
+    fun zielAuswahl(){
+        println("Wen möchtest du als Ziel auswählen?")
+        for ((index: Int, gegner: Gegner) in gegnerListe.withIndex()){
+            println("""
+                ${index + 1} für ${gegner.name}
+                """.trimIndent())
+        }
+        var zielEingabe: Int = readln().toInt()
+        var ziel = gegnerListe[zielEingabe-1]
+    }
+
     fun rundenKaempfe() {
 
         while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
