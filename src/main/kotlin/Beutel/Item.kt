@@ -12,12 +12,13 @@ open class Item(
 
     open fun itemNutzen(held: Held) {
         if (heilungItem > 0) {
-            if(heilungItem + held.lebenspunkte > held.standardLebenspunkte){
+            if (heilungItem + held.lebenspunkte > held.standardLebenspunkte) {
                 held.lebenspunkte = held.standardLebenspunkte
                 println("Die Lebenspunkte von ${held.name} werden um $heilungItem geheilt. Seine Lebenspunte betragen jetzt: ${held.lebenspunkte}")
             } else {
-            held.lebenspunkte += heilungItem
-            println("Die Lebenspunkte von ${held.name} werden um $heilungItem geheilt. Seine Lebenspunte betragen jetzt: ${held.lebenspunkte}")
+                held.lebenspunkte += heilungItem
+                println("Die Lebenspunkte von ${held.name} werden um $heilungItem geheilt. Seine Lebenspunte betragen jetzt: ${held.lebenspunkte}")
+            }
         }
         if (ruestungPlusItem > 0) {
             println("Die Rüstung von ${held.name} wird um $ruestungPlusItem erneut. Seine Rüstung beträgt jetzt: ${held.ruestungsPunkte}")
@@ -36,8 +37,6 @@ open class Item(
         if (aktionsPunkteBoostItem > 0) {
             println("Die Aktionspunkte von ${held.name} auf $aktionsPunkteBoostItem erneut.")
             held.aktionspunkte = aktionsPunkteBoostItem
-        } else if (aktionsPunkteBoostItem) {
-
         }
     }
 }
