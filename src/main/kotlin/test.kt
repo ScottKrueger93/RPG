@@ -27,6 +27,7 @@ fun main() {
     // Liste für die Rundenkämpfe
     var kaempferListe = mutableListOf(krieger, magier, heiler)
     var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
+    var hatBereitsGekaempft: MutableList<Held> = mutableListOf()
 
 
     var kampf = Rundenkampf()

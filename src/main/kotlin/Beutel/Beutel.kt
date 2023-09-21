@@ -15,5 +15,3 @@ class Beutel(var items: MutableList<Item> = mutableListOf()) {
     }
 
 }
-
-var beutel: Beutel = Beutel()

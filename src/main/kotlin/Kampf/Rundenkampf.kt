@@ -45,5 +45,3 @@ class Rundenkampf {
 
     }
 }
-
-var hatBereitsGekaempft: MutableList<Held> = mutableListOf()

@@ -1,9 +1,6 @@
 package Gegner
 
-import Helden.Attacke
 import Helden.Faehigkeit
-import Helden.normalerAngriff
-import Helden.verteidiegung
 
 open class Gegner(
     var name: String,
