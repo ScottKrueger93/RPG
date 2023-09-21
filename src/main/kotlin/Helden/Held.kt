@@ -4,16 +4,12 @@ open class Held(
     var name: String,
     var lebenspunkte: Int,
     var aktionspunkte: Int = 100,
-    var attackenListe : MutableList<Attacke> = mutableListOf(),
     var ruestungsPunkte: Int = 0,
+    var liste: MutableList<Faehigkeit>,
+    var aktion1: Faehigkeit,
+    var aktion2: Faehigkeit,
+    var aktion3: Faehigkeit,
+    var aktion4: Faehigkeit
 ) {
 
-    open fun angreifen(held: Held) {
-        if (held == magier) {
-            magier.angreifen(held)
-        } else if (held == magier) {
-            heiler.angreifen(held)
-        } else if (held == krieger)
-            krieger.angreifenKrieger(held)
-    }
 }
