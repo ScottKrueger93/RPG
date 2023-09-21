@@ -12,8 +12,8 @@ open class Held(
 ) {
 
     fun angreifen(held: Held) {
-        if (held == magier) {
-            magier.angreifen(held)
+        if (held == `Magier(DD)`()) {
+            angreifen(held)
         } else if (held == magier) {
             heiler.angreifen(held)
         } else if (held == krieger)

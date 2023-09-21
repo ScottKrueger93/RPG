@@ -29,8 +29,21 @@ fun main() {
     var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
     var hatBereitsGekaempft: MutableList<Held> = mutableListOf()
 
+    fun rundenKaempfe(){
 
-    var kampf = Rundenkampf()
-    kampf.rundenKaempfe()
+        while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
+            var istAmZug =  kaempferListe.random()
+            kaempferListe.remove(istAmZug)
+            hatBereitsGekaempft.add(istAmZug)
+            println("${istAmZug.name} ist an der Reihe.")
+            println("Was möchtest du tun?")
+            println("""--- Menü ---
+                |1 - Item benutzen
+                |2 - Fähigkeit ausführen
+            """.trimMargin())
+            when(readln()){
+                "1" -> beutel.itemAuswaehlen().itemNutzen(istAmZug)
+                "2" -> zielAuswahl()
+            }
 
 }

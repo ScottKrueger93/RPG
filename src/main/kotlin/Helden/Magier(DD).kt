@@ -11,7 +11,7 @@ class `Magier(DD)`(
     aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 200, 0, 0, 50),
 ) : Held(name, lebenspunkte, aktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    override fun angreifen(held: Held): Attacke{
+    fun angreifenMagier(held: Held): Attacke{
 
         println("Welche Attacke von ${held.name} möchtest du ausführen?")
         for ((index,attacken ) in attackenListe.withIndex()){
