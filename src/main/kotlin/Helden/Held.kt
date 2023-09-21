@@ -11,12 +11,4 @@ open class Held(
     var aktion4: Faehigkeit
 ) {
 
-    fun angreifen(held: Held) {
-        if (held == `Magier(DD)`()) {
-            angreifen(held)
-        } else if (held == magier) {
-            heiler.angreifen(held)
-        } else if (held == krieger)
-            krieger.angreifenKrieger(held)
-    }
 }
