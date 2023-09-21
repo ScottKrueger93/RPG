@@ -17,5 +17,3 @@ open class Held(
             krieger.angreifenKrieger(held)
     }
 }
-
-var kaempferListe = mutableListOf(krieger, magier, heiler)

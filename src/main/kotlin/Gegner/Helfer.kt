@@ -14,5 +14,3 @@ class Helfer(
 ) : Gegner(name, lebenspunkte, aktionspunkte, aktion1, aktion2, aktion3, aktion4) {
 
 }
-
-var helfer: Helfer = Helfer()

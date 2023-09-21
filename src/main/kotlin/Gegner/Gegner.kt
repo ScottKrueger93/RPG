@@ -16,5 +16,3 @@ open class Gegner(
 ) {
 
 }
-
-var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)

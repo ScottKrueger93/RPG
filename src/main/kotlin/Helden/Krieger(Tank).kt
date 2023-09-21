@@ -25,5 +25,3 @@ class `Krieger(Tank)`(
     }
 
 }
-
-var krieger: `Krieger(Tank)` = `Krieger(Tank)`()

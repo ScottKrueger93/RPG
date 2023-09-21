@@ -22,5 +22,3 @@ class `Heiliger (Heal)`(
     }
 
 }
-
-var heiler: `Heiliger (Heal)`= `Heiliger (Heal)`()

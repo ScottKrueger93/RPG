@@ -23,4 +23,3 @@ class `Magier(DD)`(
 
 }
 
-var magier: `Magier(DD)` = `Magier(DD)`()

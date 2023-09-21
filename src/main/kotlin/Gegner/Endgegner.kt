@@ -16,5 +16,3 @@ class Endgegner(
 ) : Gegner(name, lebenspunkte, aktionspunkte, aktion1, aktion2, aktion3, aktion4, ruestungsPunkte) {
 
 }
-
-var endBoss: Endgegner = Endgegner()

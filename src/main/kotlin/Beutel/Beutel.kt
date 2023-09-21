@@ -1,6 +1,6 @@
 package Beutel
 
-class Beutel(var items: MutableList<Item> = mutableListOf(energiePille,schadensPille, verteidigungspille, apTrank, heilTrank)) {
+class Beutel(var items: MutableList<Item> = mutableListOf()) {
 
     fun itemAuswaehlen(): Item {
         println("Welches Item möchtest du verwenden?")
