@@ -50,10 +50,12 @@ fun main() {
     fun rundenKaempfe() {
 
         while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
-
             var istAmZug = kaempferListe.random()
             kaempferListe.remove(istAmZug)
             hatBereitsGekaempft.add(istAmZug)
+            istAmZug.aktion1.schaden = istAmZug.aktion1.standardSchaden
+            istAmZug.aktion3.schaden = istAmZug.aktion3.standardSchaden
+            istAmZug.aktion4.schaden = istAmZug.aktion4.standardSchaden
             println("${istAmZug.name} ist an der Reihe.")
             do {
                 println("Was möchtest du tun?")

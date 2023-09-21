@@ -10,12 +10,33 @@ class Beutel(
     )
 ) {
 
+    fun itemBeschreibung(){
+        for (item in items) {
+            println()
+            println(item.name)
+            if (item.schadensBoostItem > 0) {
+                println("Verdoppelt den Schaden für den nächsten Angriff.")
+            }
+            if (item.heilungItem > 0) {
+                println("Heilt den aktuellen Helden um ${item.heilungItem} Lebenspunkte.")
+            }
+            if (item.ruestungPlusItem > 0) {
+                println("Fügt ${item.ruestungPlusItem} Rüstungspunkte dem aktuellen Helden hinzu.")
+            }
+            if (item.aktionsPunkteBoostItem > 0) {
+                println("Fügt ${item.aktionsPunkteBoostItem} Aktionspunkte dem aktuelle Helden hinzu.")
+            }
+        }
+    }
+
     fun itemAuswaehlen(): Item {
+        itemBeschreibung()
+        println()
         println("Welches Item möchtest du verwenden?")
         for ((index, item) in items.withIndex()) {
             println(
                 """
-            ${index + 1} für ${item.name}
+            ${index + 1} für ${item.name}. 
             """.trimIndent()
             )
         }

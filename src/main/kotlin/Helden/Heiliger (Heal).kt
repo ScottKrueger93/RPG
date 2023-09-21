@@ -9,10 +9,10 @@ class `Heiliger (Heal)`(
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
     ruestungsPunkte: Int = 0,
-    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 50, 0, 0, 0),
-    aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 50, 0),
-    aktion3: Faehigkeit = Faehigkeit("Heilung durch Licht", 0, 200, 0, 50),
-    aktion4: Faehigkeit = Faehigkeit("Engelsrettung (Wiederbelebung)", 0, 1000, 0, 100),
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 50, 50, 0, 0,0),
+    aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50,0),
+    aktion3: Faehigkeit = Faehigkeit("Heilung durch Licht", 0, 0,200, 0, 50),
+    aktion4: Faehigkeit = Faehigkeit("Engelsrettung (Wiederbelebung)", 0, 0, 1000, 0,100),
 ) : Held(name, lebenspunkte, standardLebenspunkte, aktionspunkte,standardAktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4){
 
     private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1,aktion2,aktion3,aktion4)
