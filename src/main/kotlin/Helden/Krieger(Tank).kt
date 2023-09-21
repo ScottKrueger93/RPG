@@ -26,5 +26,4 @@ class `Krieger(Tank)`(
         var attacke = attackenListe[attackenEingabe-1]
         kampf.attackeAusfuehren(attacke)
     }
-
 }

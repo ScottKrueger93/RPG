@@ -11,7 +11,7 @@ class `Heiliger (Heal)`(
     aktion4: Faehigkeit = Faehigkeit("Engelsrettung (Wiederbelebung)", 0, 1000, 0, 100),
 ) : Held(name, lebenspunkte, aktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    override fun angreifen(held: Held): Attacke{
+    fun angreifen(held: Held): Faehigkeit{
 
         println("Welche Attacke von ${held.name} möchtest du ausführen?")
         for ((index,attacken ) in attackenListe.withIndex()){
