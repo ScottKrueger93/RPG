@@ -1,10 +1,9 @@
 package Helden
 
-import Kampf.Rundenkampf
-import Kampf.kampf
+import Gegner.Gegner
 
 class `Krieger(Tank)`(
-    name: String = "Dieter das Bollwerk",
+    name: String = "Eren das Bollwerk",
     lebenspunkte: Int = 2000,
     aktionspunkte: Int = 100,
     ruestungsPunkte: Int = 500,
@@ -14,7 +13,9 @@ class `Krieger(Tank)`(
     aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 200, 50),
 ) : Held(name, lebenspunkte, aktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    fun angreifenKrieger(held: Held, kampf: Rundenkampf) {
+    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1,aktion2,aktion3,aktion4)
+
+    fun angreifenKrieger(held: Held, gegner: Gegner){
 
         println("Welche Attacke von ${held.name} möchtest du ausführen?")
         for ((index,attacken ) in attackenListe.withIndex()){
@@ -24,6 +25,6 @@ class `Krieger(Tank)`(
         }
         var attackenEingabe: Int = readln().toInt()
         var attacke = attackenListe[attackenEingabe-1]
-        kampf.attackeAusfuehren(attacke)
+        gegner.lebenspunkte - attacke.schaden
     }
 }

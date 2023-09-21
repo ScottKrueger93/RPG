@@ -1,5 +1,8 @@
 package Helden
 
+import Gegner.Endgegner
+import Gegner.Gegner
+
 class `Magier(DD)`(
     name: String = "Ezekil Houdini",
     lebenspunkte: Int = 1000,
@@ -11,7 +14,9 @@ class `Magier(DD)`(
     aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 200, 0, 0, 50),
 ) : Held(name, lebenspunkte, aktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    fun angreifenMagier(held: Held): Faehigkeit{
+    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1,aktion2,aktion3,aktion4)
+
+    fun angreifenMagier(held: Held, gegner: Gegner){
 
         println("Welche Attacke von ${held.name} möchtest du ausführen?")
         for ((index,attacken ) in attackenListe.withIndex()){
@@ -21,7 +26,7 @@ class `Magier(DD)`(
         }
         var attackenEingabe: Int = readln().toInt()
         var attacke = attackenListe[attackenEingabe-1]
-        return attacke
+        gegner.lebenspunkte - attacke.schaden
     }
 
 }

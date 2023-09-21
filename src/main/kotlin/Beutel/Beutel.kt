@@ -23,5 +23,4 @@ class Beutel(
         var item = items[itemEingabe - 1]
         return item
     }
-
 }

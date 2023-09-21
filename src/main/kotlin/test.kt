@@ -1,36 +1,50 @@
 import Beutel.*
 import Gegner.*
 import Helden.*
-import Kampf.Rundenkampf
+
+//Die Unterklassen von der Mutterklasse "Held"
+var krieger: `Krieger(Tank)` = `Krieger(Tank)`()
+var magier: `Magier(DD)` = `Magier(DD)`()
+var heiler: `Heiliger (Heal)` = `Heiliger (Heal)`()
+
+//Die Unterklassen von der Mutterklasse "Gegner"
+var endBoss: Endgegner = Endgegner()
+var helfer: Helfer = Helfer()
+
+// Klasse "Beutel"
+var beutel: Beutel = Beutel()
+
+// Liste für die Rundenkämpfe
+var kaempferListe = mutableListOf(krieger, magier, heiler)
+var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
+var hatBereitsGekaempft: MutableList<Held> = mutableListOf()
+
+var ziel = gegnerListe[0]
 
 fun main() {
 
-    //Die Unterklassen von der Mutterklasse "Held"
-    var krieger: `Krieger(Tank)` = `Krieger(Tank)`()
-    var magier: `Magier(DD)` = `Magier(DD)`()
-    var heiler: `Heiliger (Heal)` = `Heiliger (Heal)`()
-
-    //Die Unterklassen von der Mutterklasse "Gegner"
-    var endBoss: Endgegner = Endgegner()
-    var helfer: Helfer = Helfer()
-
-    // Klasse "Beutel"
-    var beutel: Beutel = Beutel()
-
-    // Liste für die Rundenkämpfe
-    var kaempferListe = mutableListOf(krieger, magier, heiler)
-    var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
-    var hatBereitsGekaempft: MutableList<Held> = mutableListOf()
-
-    fun zielAuswahl(){
+    fun zielAuswahl() {
         println("Wen möchtest du als Ziel auswählen?")
-        for ((index: Int, gegner: Gegner) in gegnerListe.withIndex()){
-            println("""
+        for ((index: Int, gegner: Gegner) in gegnerListe.withIndex()) {
+            println(
+                """
                 ${index + 1} für ${gegner.name}
-                """.trimIndent())
+                """.trimIndent()
+            )
+            var zielSpielerEingabe = readln().toInt()
+            if (zielSpielerEingabe == 1) {
+                ziel = gegnerListe[zielSpielerEingabe - 1]
+            }
         }
-        var zielEingabe: Int = readln().toInt()
-        var ziel = gegnerListe[zielEingabe-1]
+    }
+
+    fun heldenUeberPruefung(held: Held, gegner: Gegner) {
+        if (held == magier) {
+            magier.angreifenMagier(held, gegner)
+        } else if (held == heiler) {
+            heiler.angreifenHeiler(held, gegner)
+        } else if (held == krieger)
+            krieger.angreifenKrieger(held, gegner)
     }
 
     fun rundenKaempfe() {
@@ -51,6 +65,15 @@ fun main() {
                 "1" -> beutel.itemAuswaehlen().itemNutzen(istAmZug)
                 "2" -> zielAuswahl()
             }
+            heldenUeberPruefung(istAmZug, ziel)
+
+        }
+        if (krieger.lebenspunkte == 0 && magier.lebenspunkte == 0 && heiler.lebenspunkte == 0){
+            println("Du hast gewonnen!!!")
+        } else if (endBoss.lebenspunkte == 0 && helfer.lebenspunkte == 0) {
+            println("Du hast gesiegt!!!")
         }
     }
+
+    rundenKaempfe()
 }

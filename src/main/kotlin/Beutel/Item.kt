@@ -10,6 +10,9 @@ open class Item(var name: String,
 
     open fun itemNutzen(held: Held) {
         held.lebenspunkte += heilungItem
+        if (heilungItem > 0) {
+            println("Die Lebenspunkte von ${held.name} werden um $heilungItem geheilt. Seine Lebenspunte betragen jetzt: ${held.lebenspunkte}")
+        }
         held.ruestungsPunkte += ruestungPlusItem
         held.aktion1.schaden += schadensBoostItem
         if (held.aktion3.schaden > 0) {

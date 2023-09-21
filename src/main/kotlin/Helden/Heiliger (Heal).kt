@@ -1,5 +1,7 @@
 package Helden
 
+import Gegner.Gegner
+
 class `Heiliger (Heal)`(
     name: String = "Apostel Jutzius des Heiligen Ordens",
     lebenspunkte: Int = 1500,
@@ -11,7 +13,9 @@ class `Heiliger (Heal)`(
     aktion4: Faehigkeit = Faehigkeit("Engelsrettung (Wiederbelebung)", 0, 1000, 0, 100),
 ) : Held(name, lebenspunkte, aktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    fun angreifen(held: Held): Faehigkeit{
+    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1,aktion2,aktion3,aktion4)
+
+    fun angreifenHeiler(held: Held, gegner: Gegner){
 
         println("Welche Attacke von ${held.name} möchtest du ausführen?")
         for ((index,attacken ) in attackenListe.withIndex()){
@@ -21,7 +25,7 @@ class `Heiliger (Heal)`(
         }
         var attackenEingabe: Int = readln().toInt()
         var attacke = attackenListe[attackenEingabe-1]
-        return attacke
+        gegner.lebenspunkte - attacke.schaden
     }
 
 }
