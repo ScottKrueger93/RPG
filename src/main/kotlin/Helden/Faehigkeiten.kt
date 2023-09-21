@@ -7,4 +7,5 @@ class Faehigkeit(var name: String,
               var aktionsPunkteKosten:Int){
 }
 
+
 var normaler :Faehigkeit = Faehigkeit("Normaler Angriff", 50, 0, 0, 0)
