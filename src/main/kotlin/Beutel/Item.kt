@@ -11,12 +11,12 @@ open class Item(var name: String,
     open fun itemNutzen(held: Held) {
         held.lebenspunkte += heilungItem
         held.ruestungsPunkte += ruestungPlusItem
-        held.attackenListe[0].schaden += schadensBoostItem
-        if (held.attackenListe[2].schaden > 0) {
-            held.attackenListe[2].schaden += schadensBoostItem
+        held.aktion1.schaden += schadensBoostItem
+        if (held.aktion3.schaden > 0) {
+            held.aktion3.schaden += schadensBoostItem
         }
-        if (held.attackenListe[3].schaden > 0) {
-            held.attackenListe[3].schaden += schadensBoostItem
+        if (held.aktion4.schaden > 0) {
+            held.aktion4.schaden += schadensBoostItem
         }
         held.lebenspunkte += heilungItem
         held.aktionspunkte += aktionsPunkteBoostItem
