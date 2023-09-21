@@ -54,26 +54,28 @@ fun main() {
             kaempferListe.remove(istAmZug)
             hatBereitsGekaempft.add(istAmZug)
             println("${istAmZug.name} ist an der Reihe.")
-            println("Was möchtest du tun?")
-            println(
-                """--- Menü ---
+            while (readln().toInt() != 2) {
+                println("Was möchtest du tun?")
+                println(
+                    """--- Menü ---
                 |1 - Item benutzen
                 |2 - Fähigkeit ausführen
-            """.trimMargin()
-            )
-            when (readln()) {
-                "1" -> beutel.itemAuswaehlen().itemNutzen(istAmZug)
-                "2" -> zielAuswahl()
+                """.trimMargin()
+                )
+                if (readln().toInt() == 1) {
+                    beutel.itemAuswaehlen().itemNutzen(istAmZug)
+                } else if (readln().toInt() == 2) {
+                    zielAuswahl()
+                }
             }
             heldenUeberPruefung(istAmZug, ziel)
+        }
 
-        }
-        if (krieger.lebenspunkte == 0 && magier.lebenspunkte == 0 && heiler.lebenspunkte == 0){
-            println("Du hast gewonnen!!!")
-        } else if (endBoss.lebenspunkte == 0 && helfer.lebenspunkte == 0) {
-            println("Du hast gesiegt!!!")
-        }
     }
-
+    if (krieger.lebenspunkte == 0 && magier.lebenspunkte == 0 && heiler.lebenspunkte == 0) {
+        println("Du hast gewonnen!!!")
+    } else if (endBoss.lebenspunkte == 0 && helfer.lebenspunkte == 0) {
+        println("Du hast gesiegt!!!")
+    }
     rundenKaempfe()
 }
