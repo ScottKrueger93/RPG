@@ -69,11 +69,11 @@ fun main() {
     }
     fun heldenUeberPruefungGegenVerbündete(held: Held, zielHeld: Held) {
         if (held == magier) {
-            magier.angreifenMagier(held, gegner)
+            magier.angreifenMagier(held, zielGegner)
         } else if (held == heiler) {
-            heiler.angreifenHeiler(held, gegner)
+            heiler.angreifenHeiler(held, zielGegner)
         } else if (held == krieger)
-            krieger.angreifenKriegerGegner(held, gegner)
+            krieger.angreifenKriegerGegner(held, zielGegner)
     }
 
     fun rundenKaempfe() {
@@ -106,7 +106,7 @@ fun main() {
                     zielAuswahl()
                 }
             } while (eingabe != 2)
-            heldenUeberPruefung(istAmZug, zielGegner)
+            heldenUeberPruefungGegenGegner(istAmZug, zielGegner)
         }
         if (krieger.lebenspunkte == 0 && magier.lebenspunkte == 0 && heiler.lebenspunkte == 0) {
             println("Du hast verloren.")
