@@ -84,7 +84,7 @@ fun main() {
 
         while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
             var istAmZug = kaempferListe.random()
-            istAmZug.aktionspunkte += 20
+            istAmZug.aktionspunkte = minOf(istAmZug.standardAktionspunkte,istAmZug.aktionspunkte + 20)
             kaempferListe.remove(istAmZug)
             hatBereitsGekaempft.add(istAmZug)
             istAmZug.aktion1.schaden = istAmZug.aktion1.standardSchaden
