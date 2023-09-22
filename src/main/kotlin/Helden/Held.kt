@@ -1,5 +1,7 @@
 package Helden
 
+import Fähigkeiten.Faehigkeit
+
 open class Held(
     var name: String,
     var lebenspunkte: Int,
@@ -10,7 +12,7 @@ open class Held(
     var aktion1: Faehigkeit,
     var aktion2: Faehigkeit,
     var aktion3: Faehigkeit,
-    var aktion4: Faehigkeit
+    var aktion4: Faehigkeit,
 ) {
 
 }

@@ -1,7 +1,4 @@
-import Gegner.Gegner
-import Helden.Faehigkeit
-import Helden.Held
-import Helden.`Magier(DD)`
+import Fähigkeiten.Faehigkeit
 
 fun kampfBeginnt() {
 

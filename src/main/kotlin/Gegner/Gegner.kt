@@ -1,6 +1,6 @@
 package Gegner
 
-import Helden.Faehigkeit
+import Fähigkeiten.Faehigkeit
 
 open class Gegner(
     var name: String,
@@ -10,6 +10,7 @@ open class Gegner(
     val aktion1: Faehigkeit,
     val aktion2: Faehigkeit,
     var aktion3: Faehigkeit,
-    var aktion4: Faehigkeit) {
+    var aktion4: Faehigkeit,
+) {
 
 }

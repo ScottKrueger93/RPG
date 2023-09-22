@@ -1,7 +1,7 @@
 import Beutel.*
 import Gegner.*
 import Helden.*
-
+import kotlin.reflect.typeOf
 
 fun main() {
 
@@ -24,6 +24,8 @@ fun main() {
 
     var zielGegner = gegnerListe[0]
     var zielVerbuendeter = kaempferListe[0]
+    var istVerbuendeterZiel = false
+    var istGegnerZiel = false
 
 
     fun zielAuswahl() {
@@ -43,6 +45,7 @@ fun main() {
             }
                 var zielSpielerEingabe = readln().toInt()
                 zielVerbuendeter = kaempferListe[zielSpielerEingabe - 1]
+                istVerbuendeterZiel = true
                 println("Du hast ${zielVerbuendeter.name} als Ziel für eine Fähigkeit ausgewählt.")
             }
             if (heldenOderGegnerEingabe == 2){
@@ -55,36 +58,40 @@ fun main() {
             }
                 var zielSpielerEingabe = readln().toInt()
                 zielGegner = gegnerListe[zielSpielerEingabe - 1]
+                istGegnerZiel = true
                 println("Du hast ${zielGegner.name} als Ziel für eine Fähigkeit ausgewählt.")
             }
         }
 
     fun heldenUeberPruefungGegenGegner(held: Held, gegner: Gegner) {
         if (held == magier) {
-            magier.angreifenMagier(held, gegner)
+            magier.angreifenMagierGegner(held, gegner)
         } else if (held == heiler) {
-            heiler.angreifenHeiler(held, gegner)
+            heiler.angreifenHeilerGegner(held, gegner)
         } else if (held == krieger)
             krieger.angreifenKriegerGegner(held, gegner)
     }
-    fun heldenUeberPruefungGegenVerbündete(held: Held, zielHeld: Held) {
+    fun heldenUeberPruefungGegenVerbuendete(held: Held, zielHeld: Held) {
         if (held == magier) {
-            magier.angreifenMagier(held, zielGegner)
+            magier.angreifenMagierVerbuendeter(held, zielHeld)
         } else if (held == heiler) {
-            heiler.angreifenHeiler(held, zielGegner)
+            heiler.angreifenHeilerVerbuendeter(held, zielHeld)
         } else if (held == krieger)
-            krieger.angreifenKriegerGegner(held, zielGegner)
+            krieger.angreifenKriegerVerbuendeter(held, zielHeld)
     }
 
     fun rundenKaempfe() {
 
         while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
             var istAmZug = kaempferListe.random()
+            istAmZug.aktionspunkte += 20
             kaempferListe.remove(istAmZug)
             hatBereitsGekaempft.add(istAmZug)
             istAmZug.aktion1.schaden = istAmZug.aktion1.standardSchaden
             istAmZug.aktion3.schaden = istAmZug.aktion3.standardSchaden
             istAmZug.aktion4.schaden = istAmZug.aktion4.standardSchaden
+            istVerbuendeterZiel = false
+            istGegnerZiel = false
             println("${istAmZug.name} ist an der Reihe.")
             do {
                 println("Was möchtest du tun?")
@@ -106,7 +113,12 @@ fun main() {
                     zielAuswahl()
                 }
             } while (eingabe != 2)
-            heldenUeberPruefungGegenGegner(istAmZug, zielGegner)
+            if (istGegnerZiel == true) {
+                heldenUeberPruefungGegenGegner(istAmZug, zielGegner)
+            }
+            if (istVerbuendeterZiel == true){
+                heldenUeberPruefungGegenVerbuendete(istAmZug, zielVerbuendeter)
+            }
         }
         if (krieger.lebenspunkte == 0 && magier.lebenspunkte == 0 && heiler.lebenspunkte == 0) {
             println("Du hast verloren.")
