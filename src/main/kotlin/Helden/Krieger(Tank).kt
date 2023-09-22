@@ -17,9 +17,9 @@ class `Krieger(Tank)`(
 
     private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 
-    fun angreifenKrieger(held: Held, gegner: Gegner) {
+    fun angreifenKriegerGegner(held: Held, gegner: Gegner) {
 
-        println("Welche Attacke von ${held.name} möchtest du ausführen?")
+        println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
             println(
                 """

@@ -15,7 +15,7 @@ open class Item(
             if (heilungItem + held.lebenspunkte > held.standardLebenspunkte) {
                 println("Die Lebenspunkte von ${held.name} werden um ${held.standardLebenspunkte - held.lebenspunkte} geheilt. " +
                         "Die Überheilung beträgt ${held.lebenspunkte + heilungItem - held.standardLebenspunkte}." +
-                        " Seine Lebenspunte betragen jetzt: ${held.lebenspunkte}")
+                        " Seine Lebenspunkte betragen jetzt: ${held.standardLebenspunkte}")
                 held.lebenspunkte = held.standardLebenspunkte
             } else {
                 held.lebenspunkte += heilungItem
@@ -23,8 +23,8 @@ open class Item(
             }
         }
         if (ruestungPlusItem > 0) {
-            println("Die Rüstung von ${held.name} wird um $ruestungPlusItem erneut. Seine Rüstung beträgt jetzt: ${held.ruestungsPunkte}")
             held.ruestungsPunkte += ruestungPlusItem
+            println("Der Rüstung von ${held.name} werden $ruestungPlusItem Rüstungspunkte hinzugefügt. Seine Rüstung beträgt jetzt: ${held.ruestungsPunkte}")
         }
         if (schadensBoostItem > 0) {
             println("Der Schaden von ${held.name} wird für den nächsten Angriff verdoppelt.")
