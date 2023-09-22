@@ -80,9 +80,14 @@ fun main() {
             krieger.angreifenKriegerVerbuendeter(held, zielHeld)
     }
 
+    fun gegnerangriff(){
+
+    }
+
     fun rundenKaempfe() {
 
         while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
+            while (kaempferListe.isNotEmpty()){
             var istAmZug = kaempferListe.random()
             istAmZug.aktionspunkte = minOf(istAmZug.standardAktionspunkte,istAmZug.aktionspunkte + 20)
             kaempferListe.remove(istAmZug)
@@ -118,6 +123,7 @@ fun main() {
             }
             if (istVerbuendeterZiel == true){
                 heldenUeberPruefungGegenVerbuendete(istAmZug, zielVerbuendeter)
+            }
             }
         }
         if (krieger.lebenspunkte == 0 && magier.lebenspunkte == 0 && heiler.lebenspunkte == 0) {
