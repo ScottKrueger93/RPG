@@ -27,9 +27,9 @@ class `Heiliger (Heal)`(
     aktion4
 ) {
 
-    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
+    override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 
-    fun angreifenHeilerGegner(held: Held, gegner: Gegner) {
+    override fun angreifenHeilerGegner(held: Held, gegner: Gegner) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -80,7 +80,7 @@ class `Heiliger (Heal)`(
         }
     }
 
-    fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held) {
+    override fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {

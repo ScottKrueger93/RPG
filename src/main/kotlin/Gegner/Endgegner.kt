@@ -17,13 +17,13 @@ class Endgegner(
     aktion6: Faehigkeit = Faehigkeit("Knochenschild", 0, 0, 0, 250, 30),
 ) : Gegner(name, lebenspunkte, aktionspunkte, standardAktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4, aktion5, aktion6)
+    private var attackenListeBoss: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4, aktion5, aktion6)
 
-    fun bossAngriff(gegner: Gegner, held: Held) {
+    override fun bossAngriff(gegner: Gegner, held: Held) {
 
         var aktionspunkteReichenAus: Boolean = false
         while (aktionspunkteReichenAus == false) {
-            var attacke = attackenListe.random()
+            var attacke = attackenListeBoss.random()
             if (attacke.aktionsPunkteKosten > gegner.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -48,9 +48,16 @@ class Endgegner(
                 println("${held.name} hat jetzt ${held.lebenspunkte} Lebenspunkte.")
             }
             if (attacke.ruestungPlus > 0) {
+                if (attacke.name == "Verteidigungshaltung"){
                 gegner.ruestungsPunkte += attacke.ruestungPlus
                 println("${gegner.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                 println("${gegner.name} hat jetzt ${gegner.ruestungsPunkte} Rüstung.")
+                }
+                else if (attacke.name == "Knochenschild"){
+                    gegner.ruestungsPunkte += attacke.ruestungPlus
+                    println("${gegner.name} beschwört um sich herum ein ${attacke.name} und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${gegner.name} hat jetzt ${gegner.ruestungsPunkte} Rüstung.")
+                }
             }
             if (attacke.aktionsPunkteKosten > 0) {
                 gegner.aktionspunkte -= attacke.aktionsPunkteKosten

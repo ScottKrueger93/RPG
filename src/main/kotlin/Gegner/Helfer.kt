@@ -15,13 +15,13 @@ class Helfer(
     aktion4: Faehigkeit = Faehigkeit("Mauer aus Leichen", 0, 0, 0, 100, 50),
 ) : Gegner(name, lebenspunkte, aktionspunkte, standardAktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
 
-    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
+    private var attackenListeHelfer: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 
-    fun helferAngriff(gegner: Gegner, held: Held) {
+    override fun helferAngriff(gegner: Gegner, held: Held) {
 
         var aktionspunkteReichenAus: Boolean = false
         while (aktionspunkteReichenAus == false) {
-            var attacke = attackenListe.random()
+            var attacke = attackenListeHelfer.random()
             if (attacke.aktionsPunkteKosten > gegner.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue

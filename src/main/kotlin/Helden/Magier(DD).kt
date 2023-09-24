@@ -27,10 +27,10 @@ class `Magier(DD)`(
     aktion4
 ) {
 
-    private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
+    override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 
 
-    fun angreifenMagierGegner(held: Held, gegner: Gegner) {
+    override fun angreifenMagierGegner(held: Held, gegner: Gegner) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -81,7 +81,7 @@ class `Magier(DD)`(
         }
     }
 
-    fun angreifenMagierVerbuendeter(held: Held, verbuendeter: Held) {
+    override fun angreifenMagierVerbuendeter(held: Held, verbuendeter: Held) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
