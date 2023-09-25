@@ -1,7 +1,7 @@
-package Gegner
+package gegner
 
-import Fähigkeiten.Faehigkeit
-import Helden.Held
+import faehigkeiten.Faehigkeit
+import helden.Held
 
 open class Gegner(
     var name: String,
@@ -9,10 +9,10 @@ open class Gegner(
     var aktionspunkte: Int = 100,
     var standardAktionspunkte: Int = 100,
     var ruestungsPunkte: Int = 0,
-    val aktion1: Faehigkeit,
-    val aktion2: Faehigkeit,
-    var aktion3: Faehigkeit,
-    var aktion4: Faehigkeit,
+    aktion1: Faehigkeit,
+    aktion2: Faehigkeit,
+    aktion3: Faehigkeit,
+    aktion4: Faehigkeit,
     var hatSpott: Boolean,
 ) {
     private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)

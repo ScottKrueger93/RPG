@@ -1,6 +1,6 @@
-package Beutel
+package beutel
 
-import Helden.Held
+import helden.Held
 
 open class Item(
     var name: String,

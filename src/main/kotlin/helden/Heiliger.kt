@@ -1,19 +1,19 @@
-package Helden
+package helden
 
-import Fähigkeiten.Faehigkeit
-import Gegner.Gegner
+import faehigkeiten.Faehigkeit
+import gegner.Gegner
 
-class `Magier(DD)`(
-    name: String = "Ezekil Houdini",
-    lebenspunkte: Int = 1000,
-    standardLebenspunkte: Int = 1000,
+class Heiliger(
+    name: String = "Apostel Jutzius des Heiligen Ordens",
+    lebenspunkte: Int = 1500,
+    standardLebenspunkte: Int = 1500,
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
-    ruestungsPunkte: Int = 200,
+    ruestungsPunkte: Int = 0,
     aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 50, 50, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
-    aktion3: Faehigkeit = Faehigkeit("Elementar-Schwert", 100, 100, 0, 0, 50),
-    aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 200, 200, 0, 0, 80),
+    aktion3: Faehigkeit = Faehigkeit("Heilung durch Licht", 0, 0, 200, 0, 50),
+    aktion4: Faehigkeit = Faehigkeit("Engelsrettung (Wiederbelebung)", 0, 0, 1000, 0, 100),
     hatSchadenUeberZeitMalus: Boolean = false,
 ) : Held(
     name,
@@ -31,7 +31,7 @@ class `Magier(DD)`(
 
     override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 
-    override fun angreifenMagierGegner(held: Held, gegner: Gegner) {
+    override fun angreifenHeilerGegner(held: Held, gegner: Gegner) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -41,10 +41,10 @@ class `Magier(DD)`(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -55,8 +55,8 @@ class `Magier(DD)`(
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
                 } else if (gegner.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
                     gegner.ruestungsPunkte = verbleibendeRuestung
                     gegner.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -82,7 +82,7 @@ class `Magier(DD)`(
         }
     }
 
-    override fun angreifenMagierVerbuendeter(held: Held, verbuendeter: Held) {
+    override fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -92,10 +92,10 @@ class `Magier(DD)`(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -106,8 +106,8 @@ class `Magier(DD)`(
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
                 } else if (verbuendeter.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
                     verbuendeter.ruestungsPunkte = verbleibendeRuestung
                     verbuendeter.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -134,4 +134,3 @@ class `Magier(DD)`(
         }
     }
 }
-

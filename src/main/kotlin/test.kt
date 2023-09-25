@@ -1,42 +1,47 @@
-import Beutel.*
-import Gegner.*
-import Helden.*
+import beutel.*
+import gegner.*
+import helden.*
 
 fun main() {
 
     //Die Unterklassen von der Mutterklasse "Held"
-    var krieger: `Krieger(Tank)` = `Krieger(Tank)`()
-    var magier: `Magier(DD)` = `Magier(DD)`()
-    var heiler: `Heiliger (Heal)` = `Heiliger (Heal)`()
+    val krieger = Krieger()
+    val magier = Magier()
+    val heiler = Heiliger()
 
 //Die Unterklassen von der Mutterklasse "Gegner"
-    var endBoss: Endgegner = Endgegner()
-    var helfer: Helfer = Helfer()
+    val endBoss = Endgegner()
+    val helfer = Helfer()
 
 // Klasse "Beutel"
-    var beutel: Beutel = Beutel()
+    val beutel = Beutel()
 
 // Liste für die Rundenkämpfe
-    var haeldenListe = mutableListOf(krieger, magier, heiler)
-    var gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
-    var hatBereitsGekaempftHeld: MutableList<Held> = mutableListOf()
-    var hatBereitsGekaempftGegner: MutableList<Gegner> = mutableListOf()
-    var heldIstTot: MutableList<Held> = mutableListOf()
-    var gegnerIstTot: MutableList<Gegner> = mutableListOf()
+    val haeldenListe = mutableListOf(krieger, magier, heiler)
+    val gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
+    val hatBereitsGekaempftHeld: MutableList<Held> = mutableListOf()
+    val hatBereitsGekaempftGegner: MutableList<Gegner> = mutableListOf()
+    val heldIstTot: MutableList<Held> = mutableListOf()
+    val gegnerIstTot: MutableList<Gegner> = mutableListOf()
 
     var zielGegner = gegnerListe[0]
     var zielHeld = haeldenListe[0]
     var zielVerbuendeter = haeldenListe[0]
-    var istVerbuendeterZiel = false
-    var istGegnerZiel = false
+    var istVerbuendeterZiel: Boolean
+    var istGegnerZiel: Boolean
+
+    fun kampfBeginnt() {
+
+        println("Der finale Kampf beginnt!")
+    }
 
     fun schadenUberZeitBerechnung(held: Held) {
-        if (held.hatSchadenUeberZeitMalus == true) {
+        if (held.hatSchadenUeberZeitMalus) {
             if (held.lebenspunkte <= (held.standardLebenspunkte * 20 / 100)) {
                 held.hatSchadenUeberZeitMalus = false
                 println("${held.name} ist jetzt nicht mehr von Verseuchung betroffen.")
             } else {
-                var verseuchungsSchaden = held.lebenspunkte * 10 / 100
+                val verseuchungsSchaden = held.lebenspunkte * 10 / 100
                 held.lebenspunkte -= verseuchungsSchaden
                 println("${held.name} leidet an Verseuchung.")
                 println("Verseuchung verursacht an ${held.name} $verseuchungsSchaden Schaden.")
@@ -92,7 +97,7 @@ fun main() {
             |2 für Gegner
         """.trimMargin()
         )
-        var heldenOderGegnerEingabe = readln().toInt()
+        val heldenOderGegnerEingabe = readln().toInt()
         if (heldenOderGegnerEingabe == 1) {
             haeldenListe.addAll(hatBereitsGekaempftHeld)
             println("Welchen Helden möchtest du als Ziel auswählen?")
@@ -103,7 +108,7 @@ fun main() {
                 """.trimIndent()
                 )
             }
-            var zielSpielerEingabe = readln().toInt()
+            val zielSpielerEingabe = readln().toInt()
             zielVerbuendeter = haeldenListe[zielSpielerEingabe - 1]
             istVerbuendeterZiel = true
             println("Du hast ${zielVerbuendeter.name} als Ziel für eine Fähigkeit ausgewählt.")
@@ -119,7 +124,7 @@ fun main() {
                 """.trimIndent()
                 )
             }
-            var zielSpielerEingabe = readln().toInt()
+            val zielSpielerEingabe = readln().toInt()
             zielGegner = gegnerListe[zielSpielerEingabe - 1]
             istGegnerZiel = true
             println("Du hast ${zielGegner.name} als Ziel für eine Fähigkeit ausgewählt.")
@@ -128,15 +133,14 @@ fun main() {
     }
 
     fun zielAuswahlDesGegners(istAmZugGegner: Gegner) {
-        if (istAmZugGegner.hatSpott == true) {
+        if (istAmZugGegner.hatSpott) {
             println("${istAmZugGegner.name} wurde gespottet.")
-            var zielGegnerEingabe = krieger
-            zielHeld = zielGegnerEingabe
-            println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
+            zielHeld = krieger
+            println("${istAmZugGegner.name} wählt ${krieger.name} als sein Ziel aus.")
         } else {
             println("${istAmZugGegner.name} wählt ein Ziel zum Angreifen...")
             haeldenListe.addAll(hatBereitsGekaempftHeld)
-            var zielGegnerEingabe = haeldenListe.random()
+            val zielGegnerEingabe = haeldenListe.random()
             zielHeld = zielGegnerEingabe
             println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
             haeldenListe.removeAll(hatBereitsGekaempftHeld)
@@ -144,12 +148,15 @@ fun main() {
     }
 
     fun heldenUeberPruefungGegenGegner(held: Held, gegner: Gegner) {
-        if (held == magier) {
-            held.angreifenMagierGegner(held, gegner)
-        } else if (held == heiler) {
-            held.angreifenHeilerGegner(held, gegner)
-        } else if (held == krieger)
-            held.angreifenKriegerGegner(held, gegner)
+        when (held) {
+            magier -> {
+                held.angreifenMagierGegner(held, gegner)
+            }
+            heiler -> {
+                held.angreifenHeilerGegner(held, gegner)
+            }
+            krieger -> held.angreifenKriegerGegner(held, gegner)
+        }
     }
 
     fun gegnerUeberPruefungGegenHelden(gegner: Gegner, held: Held) {
@@ -161,15 +168,19 @@ fun main() {
     }
 
     fun heldenUeberPruefungGegenVerbuendete(held: Held, zielHeld: Held) {
-        if (held == magier) {
-            magier.angreifenMagierVerbuendeter(held, zielHeld)
-        } else if (held == heiler) {
-            heiler.angreifenHeilerVerbuendeter(held, zielHeld)
-        } else if (held == krieger)
-            krieger.angreifenKriegerVerbuendeter(held, zielHeld)
+        when (held) {
+            magier -> {
+                magier.angreifenMagierVerbuendeter(held, zielHeld)
+            }
+            heiler -> {
+                heiler.angreifenHeilerVerbuendeter(held, zielHeld)
+            }
+            krieger -> krieger.angreifenKriegerVerbuendeter(held, zielHeld)
+        }
     }
 
     fun rundenKaempfe(haeldenListe: MutableList<Held>, gegnerListe: MutableList<Gegner>) {
+        kampfBeginnt()
         var istAmZugHeld: Held
         var istAmZugGegner: Gegner
         while (krieger.lebenspunkte > 0 && magier.lebenspunkte > 0 && heiler.lebenspunkte > 0 || endBoss.lebenspunkte > 0 && helfer.lebenspunkte > 0) {
@@ -193,7 +204,7 @@ fun main() {
                 |2 - Ziel auswählen
                 """.trimMargin()
                     )
-                    var eingabe = readln().toInt()
+                    val eingabe = readln().toInt()
                     if (eingabe == 1) {
                         if (beutel.items.isEmpty()) {
                             println("Du hast keine Items mehr.")
@@ -205,10 +216,10 @@ fun main() {
                         zielAuswahlDesSpielers()
                     }
                 } while (eingabe != 2)
-                if (istGegnerZiel == true) {
+                if (istGegnerZiel) {
                     heldenUeberPruefungGegenGegner(istAmZugHeld, zielGegner)
                 }
-                if (istVerbuendeterZiel == true) {
+                if (istVerbuendeterZiel) {
                     heldenUeberPruefungGegenVerbuendete(istAmZugHeld, zielVerbuendeter)
                 }
                 zurGegnerIstTotListe(zielGegner, gegnerListe, hatBereitsGekaempftGegner, gegnerIstTot)

@@ -1,7 +1,7 @@
-package Gegner
+package gegner
 
-import Fähigkeiten.Faehigkeit
-import Helden.Held
+import faehigkeiten.Faehigkeit
+import helden.Held
 
 class Helfer(
     name: String = "Mönströsität aus Leichen der Heiligen Ordnung",
@@ -31,9 +31,9 @@ class Helfer(
 
     override fun helferAngriff(gegner: Gegner, held: Held) {
 
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attacke = attackenListeHelfer.random()
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attacke = attackenListeHelfer.random()
             if (attacke.aktionsPunkteKosten > gegner.aktionspunkte) {
                 println("Der Gegner hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -44,8 +44,8 @@ class Helfer(
                     println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${held.name} hat jetzt noch ${held.ruestungsPunkte} Rüstung.")
                 } else if (held.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - held.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, held.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - held.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, held.ruestungsPunkte - attacke.schaden)
                     held.ruestungsPunkte = verbleibendeRuestung
                     held.lebenspunkte -= verbeibenderSchaden
                     println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")

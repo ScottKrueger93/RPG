@@ -1,7 +1,7 @@
-package Helden
+package helden
 
-import Fähigkeiten.Faehigkeit
-import Gegner.Gegner
+import faehigkeiten.Faehigkeit
+import gegner.Gegner
 
 open class Held(
     var name: String,
@@ -11,7 +11,7 @@ open class Held(
     var standardAktionspunkte: Int = 100,
     var ruestungsPunkte: Int = 0,
     var aktion1: Faehigkeit,
-    var aktion2: Faehigkeit,
+    aktion2: Faehigkeit,
     var aktion3: Faehigkeit,
     var aktion4: Faehigkeit,
     var hatSchadenUeberZeitMalus: Boolean,
@@ -29,10 +29,10 @@ open class Held(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -43,8 +43,8 @@ open class Held(
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
                 } else if (gegner.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
                     gegner.ruestungsPunkte = verbleibendeRuestung
                     gegner.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -80,10 +80,10 @@ open class Held(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -94,8 +94,8 @@ open class Held(
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
                 } else if (verbuendeter.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
                     verbuendeter.ruestungsPunkte = verbleibendeRuestung
                     verbuendeter.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -132,10 +132,10 @@ open class Held(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -146,8 +146,8 @@ open class Held(
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
                 } else if (gegner.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
                     gegner.ruestungsPunkte = verbleibendeRuestung
                     gegner.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -183,10 +183,10 @@ open class Held(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -197,8 +197,8 @@ open class Held(
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
                 } else if (verbuendeter.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
                     verbuendeter.ruestungsPunkte = verbleibendeRuestung
                     verbuendeter.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -235,10 +235,10 @@ open class Held(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -249,8 +249,8 @@ open class Held(
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
                 } else if (gegner.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - gegner.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, gegner.ruestungsPunkte - attacke.schaden)
                     gegner.ruestungsPunkte = verbleibendeRuestung
                     gegner.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -286,10 +286,10 @@ open class Held(
             """.trimIndent()
             )
         }
-        var aktionspunkteReichenAus: Boolean = false
-        while (aktionspunkteReichenAus == false) {
-            var attackenEingabe: Int = readln().toInt()
-            var attacke = attackenListe[attackenEingabe - 1]
+        var aktionspunkteReichenAus = false
+        while (!aktionspunkteReichenAus) {
+            val attackenEingabe: Int = readln().toInt()
+            val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -300,8 +300,8 @@ open class Held(
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
                 } else if (verbuendeter.ruestungsPunkte - attacke.schaden < 0) {
-                    var verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
-                    var verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
+                    val verbeibenderSchaden = attacke.schaden - verbuendeter.ruestungsPunkte
+                    val verbleibendeRuestung = maxOf(0, verbuendeter.ruestungsPunkte - attacke.schaden)
                     verbuendeter.ruestungsPunkte = verbleibendeRuestung
                     verbuendeter.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")

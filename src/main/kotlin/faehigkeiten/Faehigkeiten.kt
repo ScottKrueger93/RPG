@@ -1,4 +1,4 @@
-package Fähigkeiten
+package faehigkeiten
 
 class Faehigkeit(
     var name: String,
@@ -7,6 +7,4 @@ class Faehigkeit(
     var heilung: Int,
     var ruestungPlus: Int,
     var aktionsPunkteKosten: Int,
-) {
-
-}
+)

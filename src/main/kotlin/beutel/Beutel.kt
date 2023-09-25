@@ -1,4 +1,4 @@
-package Beutel
+package beutel
 
 class Beutel(
     var items: MutableList<Item> = mutableListOf(
@@ -10,7 +10,7 @@ class Beutel(
     ),
 ) {
 
-    fun itemBeschreibung() {
+    private fun itemBeschreibung() {
         for (item in items) {
             println()
             println(item.name)
@@ -40,8 +40,8 @@ class Beutel(
             """.trimIndent()
             )
         }
-        var itemEingabe: Int = readln().toInt()
-        var item = items[itemEingabe - 1]
+        val itemEingabe: Int = readln().toInt()
+        val item = items[itemEingabe - 1]
         items.remove(item)
         return item
     }
