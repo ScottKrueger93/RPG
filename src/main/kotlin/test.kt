@@ -9,14 +9,14 @@ fun main() {
     val magier = Magier()
     val heiler = Heiliger()
 
-//Die Unterklassen von der Mutterklasse "Gegner"
+    //Die Unterklassen von der Mutterklasse "Gegner"
     val endBoss = Endgegner()
     val helfer = Helfer()
 
-// Klasse "Beutel"
+    // Klasse "Beutel"
     val beutel = Beutel()
 
-// Liste für die Rundenkämpfe
+    // Liste für die Rundenkämpfe
     val haeldenListe = mutableListOf(krieger, magier, heiler)
     val gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
     val hatBereitsGekaempftHeld: MutableList<Held> = mutableListOf()
@@ -173,7 +173,7 @@ fun main() {
                 magier.angreifenMagierVerbuendeter(held, zielHeld)
             }
             heiler -> {
-                heiler.angreifenHeilerVerbuendeter(held, zielHeld)
+                heiler.angreifenHeilerVerbuendeter(held, zielHeld, heldIstTot,hatBereitsGekaempftHeld)
             }
             krieger -> krieger.angreifenKriegerVerbuendeter(held, zielHeld)
         }
@@ -204,6 +204,7 @@ fun main() {
                 |2 - Ziel auswählen
                 """.trimMargin()
                     )
+
                     val eingabe = readln().toInt()
                     if (eingabe == 1) {
                         if (beutel.items.isEmpty()) {

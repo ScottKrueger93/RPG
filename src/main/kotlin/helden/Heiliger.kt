@@ -64,9 +64,16 @@ class Heiliger(
                 }
             }
             if (attacke.heilung > 0) {
-                gegner.lebenspunkte += attacke.heilung
-                println("${held.name} heilt ${gegner.name} mit ${attacke.name} um ${attacke.heilung}.")
+                if (attacke.name == "Engelsrettung (Wiederbelebung)"){
+                    println("${held.name} bestraft mit der Heiligen Macht der Engel ${gegner.name}.")
+                    gegner.lebenspunkte -= attacke.heilung
+                    println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.heilung} Schaden.")
+                    println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
+                } else {
+                gegner.lebenspunkte -= attacke.heilung
+                println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.heilung} Schaden.")
                 println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
+                }
             }
             if (attacke.ruestungPlus > 0) {
                 held.ruestungsPunkte += attacke.ruestungPlus
@@ -82,7 +89,7 @@ class Heiliger(
         }
     }
 
-    override fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held) {
+    override fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held, heldIstTot: MutableList<Held>, hatBereitsGekaempftListe: MutableList<Held>) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -116,9 +123,45 @@ class Heiliger(
 
             }
             if (attacke.heilung > 0) {
-                verbuendeter.lebenspunkte += attacke.heilung
-                println("${held.name} heilt ${verbuendeter.name} mit ${attacke.name} um ${attacke.heilung}.")
-                println("${verbuendeter.name} hat jetzt ${verbuendeter.lebenspunkte} Lebenspunkte.")
+                if (attacke.name == "Engelsrettung (Wiederbelebung)"){
+                    if (heldIstTot.isEmpty()){
+                        println("Alle Helden sind am Leben.")
+                        continue
+                    } else {
+                        println("Welchen Helden willst du Wiederbeleben?")
+                        for ((index: Int, toterHeld: Held) in heldIstTot.withIndex()){
+                            println("${index+1} für ${toterHeld.name}")
+                        }
+                        try {
+                            val spielerauswahlFuerWiederbelebung = readln().toInt()
+                            if (spielerauswahlFuerWiederbelebung == 1) {
+                                wiederbelebung(heldIstTot[0], hatBereitsGekaempftListe, heldIstTot)
+                            } else if (spielerauswahlFuerWiederbelebung == 2) {
+                                if (heldIstTot.size < 2) {
+                                    println("Ungültige Eingabe.")
+                                    continue
+                                }else{
+                                    wiederbelebung(heldIstTot[1], hatBereitsGekaempftListe, heldIstTot)
+                                }
+                            }
+                        }catch (e: Exception){
+                            println("Ungültige Eingabe.")
+                            continue
+                        }
+                    }
+                }
+                else if (held.lebenspunkte + attacke.heilung > held.standardLebenspunkte) {
+                    println(
+                        "Die Lebenspunkte von ${held.name} werden um ${held.standardLebenspunkte - held.lebenspunkte} geheilt. " +
+                                "Die Überheilung beträgt ${held.lebenspunkte + attacke.heilung - held.standardLebenspunkte}." +
+                                " Seine Lebenspunkte betragen jetzt: ${held.standardLebenspunkte}"
+                    )
+                    held.lebenspunkte = held.standardLebenspunkte
+                } else {
+                    verbuendeter.lebenspunkte += attacke.heilung
+                    println("${held.name} heilt ${verbuendeter.name} mit ${attacke.name} um ${attacke.heilung}.")
+                    println("${verbuendeter.name} hat jetzt ${verbuendeter.lebenspunkte} Lebenspunkte.")
+                }
             }
             if (attacke.ruestungPlus > 0) {
                 held.ruestungsPunkte += attacke.ruestungPlus
@@ -133,4 +176,12 @@ class Heiliger(
             aktionspunkteReichenAus = true
         }
     }
+
+
+    private fun wiederbelebung(toterHeld: Held, hatBereitsGekaempftListe: MutableList<Held>, heldIstTot: MutableList<Held>){
+        println("${toterHeld.name} wird Wiederbelebt.")
+        hatBereitsGekaempftListe.add(toterHeld)
+        heldIstTot.remove(toterHeld)
+    }
+
 }

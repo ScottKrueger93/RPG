@@ -158,7 +158,7 @@ class Krieger(
         }
     }
 
-    override fun spott(attacke: Faehigkeit, held: Held, gegner: Gegner) {
+    private fun spott(attacke: Faehigkeit, held: Held, gegner: Gegner) {
         println("${held.name} setzt ${attacke.name} ein. ${gegner.name} ist nun Wütend und nimmt ${held.name} für seinen nächsten Angriff ins Ziel. ")
         gegner.hatSpott = true
     }

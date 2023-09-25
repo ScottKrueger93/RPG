@@ -276,7 +276,7 @@ open class Held(
         }
     }
 
-    open fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held) {
+    open fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held, heldIstTot: MutableList<Held>, hatBereitsGekaempftListe: MutableList<Held>) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -326,11 +326,6 @@ open class Held(
             }
             aktionspunkteReichenAus = true
         }
-    }
-
-    open fun spott(attacke: Faehigkeit, held: Held, gegner: Gegner) {
-        println("${held.name} setzt ${attacke.name} ein. ${gegner.name} ist nun Wütend und nimmt ${held.name} für seinen nächsten Angriff ins Ziel. ")
-        gegner.hatSpott = true
     }
 
 }

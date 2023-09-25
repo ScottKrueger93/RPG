@@ -13,8 +13,8 @@ class Helfer(
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Leichenwurf", 100, 100, 0, 0, 50),
     aktion4: Faehigkeit = Faehigkeit("Mauer aus Leichen", 0, 0, 0, 100, 50),
-    hatSpott:Boolean = false
-    ) : Gegner(
+    hatSpott: Boolean = false
+) : Gegner(
     name,
     lebenspunkte,
     aktionspunkte,
