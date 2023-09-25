@@ -15,23 +15,56 @@ class Endgegner(
     aktion4: Faehigkeit = Faehigkeit("Verseuchung", 0, 0, 0, 0, 50),
     aktion5: Faehigkeit = Faehigkeit("Schattenblitz", 350, 350, 0, 0, 30),
     aktion6: Faehigkeit = Faehigkeit("Monströsität beschwören", 0, 0, 0, 0, 0),
-) : Gegner(name, lebenspunkte, aktionspunkte, standardAktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
+) : Gegner(
+    name,
+    lebenspunkte,
+    aktionspunkte,
+    standardAktionspunkte,
+    ruestungsPunkte,
+    aktion1,
+    aktion2,
+    aktion3,
+    aktion4
+) {
 
-    private var attackenListeBoss: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4, aktion5, aktion6)
+    private var attackenListeBoss: MutableList<Faehigkeit> =
+        mutableListOf(aktion1, aktion2, aktion3, aktion4, aktion5, aktion6)
 
-    override fun bossAngriff(gegner: Gegner, held: Held, helfer: Helfer, gegnerList: MutableList<Gegner>, hatBereitsGekaempftListe: MutableList<Held>, gegnerIstTotListe: MutableList<Gegner>) {
+    override fun bossAngriff(
+        gegner: Gegner,
+        held: Held,
+        helfer: Helfer,
+        gegnerList: MutableList<Gegner>,
+        hatBereitsGekaempftListe: MutableList<Held>,
+        gegnerIstTotListe: MutableList<Gegner>,
+    ) {
 
         var attacke: Faehigkeit
-        var aktionspunkteReichenAus: Boolean = false
+        var aktionspunkteReichenAus = false
         while (aktionspunkteReichenAus == false) {
             attacke = attackenListeBoss.random()
             if (attacke.aktionsPunkteKosten > gegner.aktionspunkte) {
                 println("Der Gegner hat nicht genug AP für diese Fähigkeit.")
                 continue
             }
+            if (attacke.name == "Verseuchung") {
+                if (held.hatSchadenUeberZeitMalus == true) {
+                    println("${held.name} ist bereits verseucht.")
+                    continue
+                } else {
+                    schadenUeberZeitAngriff(attacke, held, gegner)
+                }
+            }
+            if (attacke.name == "Monströsität beschwören") {
+                if (helfer in gegnerList || helfer in gegnerIstTotListe) {
+                    continue
+                } else {
+                    helferBeschwoeren(attacke, gegner, helfer, gegnerList)
+                }
+            }
             if (attacke.schaden > 0) {
                 if (attacke.name == "Schatten-Miasma") {
-                    flaechenAngriff(attacke, held, gegner, hatBereitsGekaempftListe)
+                    flaechenAngriff(attacke, gegner, hatBereitsGekaempftListe)
                 } else if (held.ruestungsPunkte - attacke.schaden > 0) {
                     held.ruestungsPunkte -= attacke.schaden
                     println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
@@ -62,48 +95,33 @@ class Endgegner(
                 println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                 println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
             }
-            if (attacke.name == "Monströsität beschwören") {
-                if (helfer in gegnerList || helfer in gegnerIstTotListe){
-                    continue
-                } else {
-                    helferBeschwoeren(attacke,gegner,helfer, gegnerList)
-                }
-            }
-            if (attacke.name == "Verseuchung"){
-                if (held.hatSchadenUeberZeitMalus == true){
-                    println("${held.name} ist bereits verseucht.")
-                    continue
-                } else {
-                    schadenUeberZeitAngriff(attacke, held, gegner)
-                }
-            }
             aktionspunkteReichenAus = true
         }
     }
 
-    fun flaechenAngriff(attacke: Faehigkeit, held: Held, gegner: Gegner, hatBereitsGekaempftListe: MutableList<Held>) {
+    fun flaechenAngriff(attacke: Faehigkeit, gegner: Gegner, hatBereitsGekaempftListe: MutableList<Held>) {
         for (heldVonFlaechenangriffGetroffen in hatBereitsGekaempftListe) {
-            if (held.ruestungsPunkte - attacke.schaden > 0) {
-                held.ruestungsPunkte -= attacke.schaden
-                println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
-                println("${held.name} hat jetzt noch ${held.ruestungsPunkte} Rüstung.")
-            } else if (held.ruestungsPunkte - attacke.schaden < 0) {
-                var verbeibenderSchaden = attacke.schaden - held.ruestungsPunkte
-                var verbleibendeRuestung = maxOf(0, held.ruestungsPunkte - attacke.schaden)
-                held.ruestungsPunkte = verbleibendeRuestung
-                held.lebenspunkte -= verbeibenderSchaden
-                println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
-                println("${held.name} hat jetzt noch ${held.lebenspunkte} Lebenspunkte.")
+            if (heldVonFlaechenangriffGetroffen.ruestungsPunkte - attacke.schaden > 0) {
+                heldVonFlaechenangriffGetroffen.ruestungsPunkte -= attacke.schaden
+                println("${gegner.name} greift ${heldVonFlaechenangriffGetroffen.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
+                println("${heldVonFlaechenangriffGetroffen.name} hat jetzt noch ${heldVonFlaechenangriffGetroffen.ruestungsPunkte} Rüstung.")
+            } else if (heldVonFlaechenangriffGetroffen.ruestungsPunkte - attacke.schaden < 0) {
+                var verbeibenderSchaden = attacke.schaden - heldVonFlaechenangriffGetroffen.ruestungsPunkte
+                var verbleibendeRuestung = maxOf(0, heldVonFlaechenangriffGetroffen.ruestungsPunkte - attacke.schaden)
+                heldVonFlaechenangriffGetroffen.ruestungsPunkte = verbleibendeRuestung
+                heldVonFlaechenangriffGetroffen.lebenspunkte -= verbeibenderSchaden
+                println("${gegner.name} greift ${heldVonFlaechenangriffGetroffen.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
+                println("${heldVonFlaechenangriffGetroffen.name} hat jetzt noch ${heldVonFlaechenangriffGetroffen.lebenspunkte} Lebenspunkte.")
             }
         }
     }
 
-    fun helferBeschwoeren(attacke: Faehigkeit, gegner: Gegner, helfer: Helfer, gegnerList: MutableList<Gegner>){
+    fun helferBeschwoeren(attacke: Faehigkeit, gegner: Gegner, helfer: Helfer, gegnerList: MutableList<Gegner>) {
         println("${gegner.name} setzt ${attacke.name} ein und beschwört eine ${helfer.name}.")
         gegnerList.add(helfer)
     }
 
-    fun schadenUeberZeitAngriff(attacke: Faehigkeit, held: Held, gegner: Gegner){
+    fun schadenUeberZeitAngriff(attacke: Faehigkeit, held: Held, gegner: Gegner) {
         println("${gegner.name} setzt ${attacke.name} ein. ${held.name} ist nun verseucht. ")
         println("${held.name} nimmt ab jetzt jede Runde 10% Schaden seiner aktuellen Lebenspunkte, bis diese 20% seiner maximalen Lebenspunkte betragen.")
         held.hatSchadenUeberZeitMalus = true

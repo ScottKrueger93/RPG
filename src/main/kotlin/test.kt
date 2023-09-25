@@ -30,9 +30,9 @@ fun main() {
     var istVerbuendeterZiel = false
     var istGegnerZiel = false
 
-    fun schadenUberZeitBerechnung(held: Held){
-        if (held.hatSchadenUeberZeitMalus == true){
-            if (held.lebenspunkte <= (held.standardLebenspunkte * 20 / 100)){
+    fun schadenUberZeitBerechnung(held: Held) {
+        if (held.hatSchadenUeberZeitMalus == true) {
+            if (held.lebenspunkte <= (held.standardLebenspunkte * 20 / 100)) {
                 held.hatSchadenUeberZeitMalus = false
                 println("${held.name} ist jetzt nicht mehr von Verseuchung betroffen.")
             } else {
@@ -40,27 +40,37 @@ fun main() {
                 held.lebenspunkte -= verseuchungsSchaden
                 println("${held.name} leidet an Verseuchung.")
                 println("Verseuchung verursacht an ${held.name} $verseuchungsSchaden Schaden.")
-                println("${held.name} hat jetzt ${held.lebenspunkte}")
+                println("${held.name} hat jetzt ${held.lebenspunkte} Lebenspunkte.")
             }
         }
     }
 
-    fun zurHeldIstTotListe(held: Held, haeldenListe: MutableList<Held>, hatBereitsGekaempftHeld: MutableList<Held>, heldIstTot: MutableList<Held>){
-        if (haeldenListe.isNotEmpty()){
-            if (held.lebenspunkte <= 0){
+    fun zurHeldIstTotListe(
+        held: Held,
+        haeldenListe: MutableList<Held>,
+        hatBereitsGekaempftHeld: MutableList<Held>,
+        heldIstTot: MutableList<Held>,
+    ) {
+        if (haeldenListe.isNotEmpty()) {
+            if (held.lebenspunkte <= 0) {
                 heldIstTot.add(held)
                 haeldenListe.remove(held)
             }
         }
         if (hatBereitsGekaempftHeld.isNotEmpty()) {
-            if (held.lebenspunkte <= 0){
+            if (held.lebenspunkte <= 0) {
                 heldIstTot.add(held)
                 hatBereitsGekaempftHeld.remove(held)
             }
         }
     }
 
-    fun zurGegnerIstTotListe(gegner: Gegner, gegnerListe: MutableList<Gegner>, hatBereitsGekaempftGegner: MutableList<Gegner>, gegnerIstTot: MutableList<Gegner>){
+    fun zurGegnerIstTotListe(
+        gegner: Gegner,
+        gegnerListe: MutableList<Gegner>,
+        hatBereitsGekaempftGegner: MutableList<Gegner>,
+        gegnerIstTot: MutableList<Gegner>,
+    ) {
         if (gegnerListe.isNotEmpty()) {
             if (gegner.lebenspunkte < 0) {
                 gegnerIstTot.add(gegner)
@@ -121,10 +131,10 @@ fun main() {
         println("${istAmZugGegner.name} wählt ein Ziel zum Angreifen...")
         haeldenListe.addAll(hatBereitsGekaempftHeld)
         var zielGegnerEingabe = haeldenListe.random()
-            zielHeld = zielGegnerEingabe
-            println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
-            haeldenListe.removeAll(hatBereitsGekaempftHeld)
-        }
+        zielHeld = zielGegnerEingabe
+        println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
+        haeldenListe.removeAll(hatBereitsGekaempftHeld)
+    }
 
     fun heldenUeberPruefungGegenGegner(held: Held, gegner: Gegner) {
         if (held == magier) {
@@ -155,7 +165,7 @@ fun main() {
     fun rundenKaempfe(haeldenListe: MutableList<Held>, gegnerListe: MutableList<Gegner>) {
         var istAmZugHeld: Held
         var istAmZugGegner: Gegner
-        while (krieger.lebenspunkte < 0 && magier.lebenspunkte < 0 && heiler.lebenspunkte < 0 || endBoss.lebenspunkte < 0 && helfer.lebenspunkte < 0) {
+        while (krieger.lebenspunkte > 0 && magier.lebenspunkte > 0 && heiler.lebenspunkte > 0 || endBoss.lebenspunkte > 0 && helfer.lebenspunkte > 0) {
             while (haeldenListe.isNotEmpty()) {
                 istAmZugHeld = haeldenListe.random()
                 schadenUberZeitBerechnung(istAmZugHeld)
@@ -211,24 +221,24 @@ fun main() {
                 println("${istAmZugGegner.name} ist an der Reihe.")
                 zielAuswahlDesGegners(istAmZugGegner)
                 gegnerUeberPruefungGegenHelden(istAmZugGegner, zielHeld)
-                zurHeldIstTotListe(zielHeld,haeldenListe, hatBereitsGekaempftHeld, heldIstTot)
+                zurHeldIstTotListe(zielHeld, haeldenListe, hatBereitsGekaempftHeld, heldIstTot)
                 if (haeldenListe.isEmpty()) {
                     break
                 }
-            }
-            if (haeldenListe.isEmpty()) {
-                break
             }
             haeldenListe.addAll(hatBereitsGekaempftHeld)
             hatBereitsGekaempftHeld.clear()
             gegnerListe.addAll(hatBereitsGekaempftGegner)
             hatBereitsGekaempftGegner.clear()
+            if (haeldenListe.isEmpty()) {
+                break
+            }
         }
         if (krieger.lebenspunkte < 0 && magier.lebenspunkte < 0 && heiler.lebenspunkte < 0) {
             println("Du hast verloren.")
         } else if (endBoss.lebenspunkte < 0 && helfer.lebenspunkte < 0) {
             println("Du hast gesiegt!!!")
-        } else if (endBoss.lebenspunkte < 0){
+        } else if (endBoss.lebenspunkte < 0) {
             println("Du hast gesiegt!!!")
         }
     }

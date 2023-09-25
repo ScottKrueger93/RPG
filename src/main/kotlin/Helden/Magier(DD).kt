@@ -14,7 +14,7 @@ class `Magier(DD)`(
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Elementar-Schwert", 100, 100, 0, 0, 50),
     aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 200, 200, 0, 0, 80),
-    hatSchadenUeberZeitMalus: Boolean = false
+    hatSchadenUeberZeitMalus: Boolean = false,
 ) : Held(
     name,
     lebenspunkte,

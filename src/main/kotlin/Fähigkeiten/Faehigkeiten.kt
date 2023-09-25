@@ -6,7 +6,7 @@ class Faehigkeit(
     var standardSchaden: Int,
     var heilung: Int,
     var ruestungPlus: Int,
-    var aktionsPunkteKosten: Int
+    var aktionsPunkteKosten: Int,
 ) {
 
 }

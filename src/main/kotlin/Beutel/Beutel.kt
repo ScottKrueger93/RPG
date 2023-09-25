@@ -7,10 +7,10 @@ class Beutel(
         Item("Verteidigungspille", 0, 0, 1000, 0),
         Item("AP-Trank", 0, 0, 0, 100),
         Item("Heiltrank", 0, 1000, 0, 0)
-    )
+    ),
 ) {
 
-    fun itemBeschreibung(){
+    fun itemBeschreibung() {
         for (item in items) {
             println()
             println(item.name)

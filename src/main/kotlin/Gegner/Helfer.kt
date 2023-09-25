@@ -13,7 +13,17 @@ class Helfer(
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Leichenwurf", 100, 100, 0, 0, 50),
     aktion4: Faehigkeit = Faehigkeit("Mauer aus Leichen", 0, 0, 0, 100, 50),
-) : Gegner(name, lebenspunkte, aktionspunkte, standardAktionspunkte, ruestungsPunkte, aktion1, aktion2, aktion3, aktion4) {
+) : Gegner(
+    name,
+    lebenspunkte,
+    aktionspunkte,
+    standardAktionspunkte,
+    ruestungsPunkte,
+    aktion1,
+    aktion2,
+    aktion3,
+    aktion4
+) {
 
     private var attackenListeHelfer: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 

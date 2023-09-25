@@ -58,7 +58,14 @@ open class Gegner(
         }
     }
 
-    open fun bossAngriff(gegner: Gegner, held: Held, helfer: Helfer, gegnerList: MutableList<Gegner>, hatBereitsGekaempftListe: MutableList<Held>, gegnerIstTotListe: MutableList<Gegner>){
+    open fun bossAngriff(
+        gegner: Gegner,
+        held: Held,
+        helfer: Helfer,
+        gegnerList: MutableList<Gegner>,
+        hatBereitsGekaempftListe: MutableList<Held>,
+        gegnerIstTotListe: MutableList<Gegner>,
+    ) {
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attacke = attackenListe.random()
