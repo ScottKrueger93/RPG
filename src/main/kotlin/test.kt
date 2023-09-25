@@ -140,7 +140,7 @@ fun main() {
     fun rundenKaempfe(haeldenListe: MutableList<Held>, gegnerListe: MutableList<Gegner>) {
         var istAmZugHeld: Held
         var istAmZugGegner: Gegner
-        while (krieger.lebenspunkte != 0 && magier.lebenspunkte != 0 && heiler.lebenspunkte != 0 || endBoss.lebenspunkte != 0 && helfer.lebenspunkte != 0) {
+        while (krieger.lebenspunkte < 0 && magier.lebenspunkte < 0 && heiler.lebenspunkte < 0 || endBoss.lebenspunkte < 0 && helfer.lebenspunkte < 0) {
             while (haeldenListe.isNotEmpty()) {
                 istAmZugHeld = haeldenListe.random()
                 istAmZugHeld.aktionspunkte = minOf(istAmZugHeld.standardAktionspunkte, istAmZugHeld.aktionspunkte + 20)

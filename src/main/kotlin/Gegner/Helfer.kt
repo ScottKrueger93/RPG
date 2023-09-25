@@ -23,7 +23,7 @@ class Helfer(
         while (aktionspunkteReichenAus == false) {
             var attacke = attackenListeHelfer.random()
             if (attacke.aktionsPunkteKosten > gegner.aktionspunkte) {
-                println("Der Held hat nicht genug AP für diese Fähigkeit.")
+                println("Der Gegner hat nicht genug AP für diese Fähigkeit.")
                 continue
             }
             if (attacke.schaden > 0) {

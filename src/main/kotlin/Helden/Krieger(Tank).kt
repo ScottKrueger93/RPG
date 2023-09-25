@@ -80,7 +80,7 @@ class `Krieger(Tank)`(
         }
     }
 
-   override fun angreifenKriegerVerbuendeter(held: Held, verbuendeter: Held) {
+    override fun angreifenKriegerVerbuendeter(held: Held, verbuendeter: Held) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -131,4 +131,6 @@ class `Krieger(Tank)`(
             aktionspunkteReichenAus = true
         }
     }
+
+
 }

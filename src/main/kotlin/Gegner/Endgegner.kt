@@ -25,7 +25,7 @@ class Endgegner(
         while (aktionspunkteReichenAus == false) {
             var attacke = attackenListeBoss.random()
             if (attacke.aktionsPunkteKosten > gegner.aktionspunkte) {
-                println("Der Held hat nicht genug AP für diese Fähigkeit.")
+                println("Der Gegner hat nicht genug AP für diese Fähigkeit.")
                 continue
             }
             if (attacke.schaden > 0) {
@@ -67,5 +67,7 @@ class Endgegner(
             aktionspunkteReichenAus = true
         }
     }
+
+
 
 }
