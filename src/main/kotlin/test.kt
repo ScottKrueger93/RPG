@@ -204,7 +204,6 @@ fun main() {
                 |2 - Ziel auswählen
                 """.trimMargin()
                     )
-
                     val eingabe = readln().toInt()
                     if (eingabe == 1) {
                         if (beutel.items.isEmpty()) {

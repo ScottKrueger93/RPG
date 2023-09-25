@@ -126,7 +126,7 @@ class Heiliger(
                 if (attacke.name == "Engelsrettung (Wiederbelebung)"){
                     if (heldIstTot.isEmpty()){
                         println("Alle Helden sind am Leben.")
-                        continue
+                        angreifenHeilerVerbuendeter(held,verbuendeter,heldIstTot,hatBereitsGekaempftListe)
                     } else {
                         println("Welchen Helden willst du Wiederbeleben?")
                         for ((index: Int, toterHeld: Held) in heldIstTot.withIndex()){
@@ -169,6 +169,7 @@ class Heiliger(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
+                //TODO: AP dürfen nicht unter 0 fallen können
                 held.aktionspunkte -= attacke.aktionsPunkteKosten
                 println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                 println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")

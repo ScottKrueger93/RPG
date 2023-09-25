@@ -75,7 +75,7 @@ class Krieger(
                     println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                     println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
                 }
-                if (attacke.name == "Schützendes Schild") {
+                else if (attacke.name == "Schützendes Schild") {
                     held.ruestungsPunkte += attacke.ruestungPlus
                     println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                     println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
@@ -139,7 +139,7 @@ class Krieger(
                     println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                     println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
                 }
-                if (attacke.name == "Schützendes Schild") {
+                else if (attacke.name == "Schützendes Schild") {
                     held.ruestungsPunkte += attacke.ruestungPlus
                     println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                     println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
