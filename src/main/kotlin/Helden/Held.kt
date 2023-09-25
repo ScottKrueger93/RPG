@@ -14,6 +14,7 @@ open class Held(
     var aktion2: Faehigkeit,
     var aktion3: Faehigkeit,
     var aktion4: Faehigkeit,
+    var hatSchadenUeberZeitMalus: Boolean,
 ) {
 
     open var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)

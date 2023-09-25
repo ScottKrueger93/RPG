@@ -30,6 +30,21 @@ fun main() {
     var istVerbuendeterZiel = false
     var istGegnerZiel = false
 
+    fun schadenUberZeitBerechnung(held: Held){
+        if (held.hatSchadenUeberZeitMalus == true){
+            if (held.lebenspunkte <= (held.standardLebenspunkte * 20 / 100)){
+                held.hatSchadenUeberZeitMalus = false
+                println("${held.name} ist jetzt nicht mehr von Verseuchung betroffen.")
+            } else {
+                var verseuchungsSchaden = held.lebenspunkte * 10 / 100
+                held.lebenspunkte -= verseuchungsSchaden
+                println("${held.name} leidet an Verseuchung.")
+                println("Verseuchung verursacht an ${held.name} $verseuchungsSchaden Schaden.")
+                println("${held.name} hat jetzt ${held.lebenspunkte}")
+            }
+        }
+    }
+
     fun zurHeldIstTotListe(held: Held, haeldenListe: MutableList<Held>, hatBereitsGekaempftHeld: MutableList<Held>, heldIstTot: MutableList<Held>){
         if (haeldenListe.isNotEmpty()){
             if (held.lebenspunkte <= 0){
@@ -122,7 +137,7 @@ fun main() {
 
     fun gegnerUeberPruefungGegenHelden(gegner: Gegner, held: Held) {
         if (gegner == endBoss) {
-            gegner.bossAngriff(gegner, held)
+            gegner.bossAngriff(gegner, held, helfer, gegnerListe, hatBereitsGekaempftHeld, gegnerIstTot)
         } else if (gegner == helfer) {
             gegner.helferAngriff(gegner, held)
         }
@@ -143,6 +158,7 @@ fun main() {
         while (krieger.lebenspunkte < 0 && magier.lebenspunkte < 0 && heiler.lebenspunkte < 0 || endBoss.lebenspunkte < 0 && helfer.lebenspunkte < 0) {
             while (haeldenListe.isNotEmpty()) {
                 istAmZugHeld = haeldenListe.random()
+                schadenUberZeitBerechnung(istAmZugHeld)
                 istAmZugHeld.aktionspunkte = minOf(istAmZugHeld.standardAktionspunkte, istAmZugHeld.aktionspunkte + 20)
                 haeldenListe.remove(istAmZugHeld)
                 hatBereitsGekaempftHeld.add(istAmZugHeld)

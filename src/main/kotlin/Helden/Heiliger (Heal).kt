@@ -14,6 +14,7 @@ class `Heiliger (Heal)`(
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Heilung durch Licht", 0, 0, 200, 0, 50),
     aktion4: Faehigkeit = Faehigkeit("Engelsrettung (Wiederbelebung)", 0, 0, 1000, 0, 100),
+    hatSchadenUeberZeitMalus: Boolean = false
 ) : Held(
     name,
     lebenspunkte,
@@ -24,7 +25,8 @@ class `Heiliger (Heal)`(
     aktion1,
     aktion2,
     aktion3,
-    aktion4
+    aktion4,
+    hatSchadenUeberZeitMalus
 ) {
 
     override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)

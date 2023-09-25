@@ -14,6 +14,7 @@ class `Magier(DD)`(
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Elementar-Schwert", 100, 100, 0, 0, 50),
     aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 200, 200, 0, 0, 80),
+    hatSchadenUeberZeitMalus: Boolean = false
 ) : Held(
     name,
     lebenspunkte,
@@ -24,11 +25,11 @@ class `Magier(DD)`(
     aktion1,
     aktion2,
     aktion3,
-    aktion4
+    aktion4,
+    hatSchadenUeberZeitMalus
 ) {
 
     override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
-
 
     override fun angreifenMagierGegner(held: Held, gegner: Gegner) {
 

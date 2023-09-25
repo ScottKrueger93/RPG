@@ -10,11 +10,12 @@ class `Krieger(Tank)`(
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
     ruestungsPunkte: Int = 500,
-    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 10000, 10000, 0, 0, 0),
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 100, 100, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
-    aktion3: Faehigkeit = Faehigkeit("Spott", 0, 0, 0, 50, 50),
+    aktion3: Faehigkeit = Faehigkeit("Spott", 0, 0, 0, 150, 50),
     aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 200, 0, 50),
-) : Held(
+    hatSchadenUeberZeitMalus: Boolean = false
+    ) : Held(
     name,
     lebenspunkte,
     standardLebenspunkte,
@@ -24,7 +25,8 @@ class `Krieger(Tank)`(
     aktion1,
     aktion2,
     aktion3,
-    aktion4
+    aktion4,
+    hatSchadenUeberZeitMalus
 ) {
 
     override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
