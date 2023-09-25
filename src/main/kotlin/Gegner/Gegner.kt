@@ -13,6 +13,7 @@ open class Gegner(
     val aktion2: Faehigkeit,
     var aktion3: Faehigkeit,
     var aktion4: Faehigkeit,
+    var hatSpott: Boolean,
 ) {
     private var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
 

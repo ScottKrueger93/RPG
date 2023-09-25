@@ -128,12 +128,19 @@ fun main() {
     }
 
     fun zielAuswahlDesGegners(istAmZugGegner: Gegner) {
-        println("${istAmZugGegner.name} wählt ein Ziel zum Angreifen...")
-        haeldenListe.addAll(hatBereitsGekaempftHeld)
-        var zielGegnerEingabe = haeldenListe.random()
-        zielHeld = zielGegnerEingabe
-        println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
-        haeldenListe.removeAll(hatBereitsGekaempftHeld)
+        if (istAmZugGegner.hatSpott == true) {
+            println("${istAmZugGegner.name} wurde gespottet.")
+            var zielGegnerEingabe = krieger
+            zielHeld = zielGegnerEingabe
+            println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
+        } else {
+            println("${istAmZugGegner.name} wählt ein Ziel zum Angreifen...")
+            haeldenListe.addAll(hatBereitsGekaempftHeld)
+            var zielGegnerEingabe = haeldenListe.random()
+            zielHeld = zielGegnerEingabe
+            println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
+            haeldenListe.removeAll(hatBereitsGekaempftHeld)
+        }
     }
 
     fun heldenUeberPruefungGegenGegner(held: Held, gegner: Gegner) {

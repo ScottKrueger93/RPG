@@ -13,7 +13,7 @@ class `Krieger(Tank)`(
     aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 100, 100, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Spott", 0, 0, 0, 150, 50),
-    aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 200, 0, 50),
+    aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 0, 250, 50),
     hatSchadenUeberZeitMalus: Boolean = false,
 ) : Held(
     name,
@@ -26,7 +26,7 @@ class `Krieger(Tank)`(
     aktion2,
     aktion3,
     aktion4,
-    hatSchadenUeberZeitMalus
+    hatSchadenUeberZeitMalus,
 ) {
 
     override var attackenListe: MutableList<Faehigkeit> = mutableListOf(aktion1, aktion2, aktion3, aktion4)
@@ -69,9 +69,21 @@ class `Krieger(Tank)`(
                 println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
             }
             if (attacke.ruestungPlus > 0) {
-                held.ruestungsPunkte += attacke.ruestungPlus
-                println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                if (attacke.name == "Spott") {
+                    spott(attacke, held, gegner)
+                    held.ruestungsPunkte += attacke.ruestungPlus
+                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                }
+                if (attacke.name == "Schützendes Schild") {
+                    held.ruestungsPunkte += attacke.ruestungPlus
+                    println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                } else {
+                    held.ruestungsPunkte += attacke.ruestungPlus
+                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                }
             }
             if (attacke.aktionsPunkteKosten > 0) {
                 held.aktionspunkte -= attacke.aktionsPunkteKosten
@@ -121,9 +133,21 @@ class `Krieger(Tank)`(
                 println("${verbuendeter.name} hat jetzt ${verbuendeter.lebenspunkte} Lebenspunkte.")
             }
             if (attacke.ruestungPlus > 0) {
-                held.ruestungsPunkte += attacke.ruestungPlus
-                println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                if (attacke.name == "Spott") {
+                    println("${held.name} Spottet über ${verbuendeter.name}. Dieser ist unbeeindruckt.")
+                    held.ruestungsPunkte += attacke.ruestungPlus
+                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                }
+                if (attacke.name == "Schützendes Schild") {
+                    held.ruestungsPunkte += attacke.ruestungPlus
+                    println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                } else {
+                    held.ruestungsPunkte += attacke.ruestungPlus
+                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                }
             }
             if (attacke.aktionsPunkteKosten > 0) {
                 held.aktionspunkte -= attacke.aktionsPunkteKosten
@@ -134,5 +158,10 @@ class `Krieger(Tank)`(
         }
     }
 
+    override fun spott(attacke: Faehigkeit, held: Held, gegner: Gegner) {
+        println("${held.name} setzt ${attacke.name} ein. ${gegner.name} ist nun Wütend und nimmt ${held.name} für seinen nächsten Angriff ins Ziel. ")
+        gegner.hatSpott = true
+    }
 
 }
+

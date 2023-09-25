@@ -15,7 +15,8 @@ class Endgegner(
     aktion4: Faehigkeit = Faehigkeit("Verseuchung", 0, 0, 0, 0, 50),
     aktion5: Faehigkeit = Faehigkeit("Schattenblitz", 350, 350, 0, 0, 30),
     aktion6: Faehigkeit = Faehigkeit("Monströsität beschwören", 0, 0, 0, 0, 0),
-) : Gegner(
+    hatSpott:Boolean = false
+    ) : Gegner(
     name,
     lebenspunkte,
     aktionspunkte,
@@ -24,7 +25,8 @@ class Endgegner(
     aktion1,
     aktion2,
     aktion3,
-    aktion4
+    aktion4,
+    hatSpott,
 ) {
 
     private var attackenListeBoss: MutableList<Faehigkeit> =
@@ -96,6 +98,7 @@ class Endgegner(
                 println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
+            gegner.hatSpott = false
         }
     }
 
