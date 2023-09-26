@@ -41,29 +41,34 @@ class Beutel(
             )
         }
         val itemEingabe: Int = readln().toInt()
-        if (items.size > 1){
+        if (items.size < 2) {
             if (itemEingabe != 1) {
                 println("Ungültige Eingabe.")
+                return itemAuswaehlen()
             }
         }
-        if (items.size > 2){
+        else if (items.size < 3) {
             if (itemEingabe != 1 && itemEingabe != 2) {
                 println("Ungültige Eingabe.")
+                return itemAuswaehlen()
             }
         }
-        if (items.size > 3){
+        else if (items.size < 4) {
             if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3) {
                 println("Ungültige Eingabe.")
+                return itemAuswaehlen()
             }
         }
-        if (items.size > 4){
+        else if (items.size < 5) {
             if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3 && itemEingabe != 4) {
                 println("Ungültige Eingabe.")
+                return itemAuswaehlen()
             }
         }
-        if (items.size > 5){
+        else if (items.size < 6) {
             if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3 && itemEingabe != 4 && itemEingabe != 5) {
                 println("Ungültige Eingabe.")
+                return itemAuswaehlen()
             }
         }
         val item = items[itemEingabe - 1]

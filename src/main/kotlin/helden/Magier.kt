@@ -78,7 +78,7 @@ class Magier(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte - attacke.aktionsPunkteKosten > held.aktionspunkte){
+                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
                     held.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
@@ -140,7 +140,7 @@ class Magier(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte - attacke.aktionsPunkteKosten > held.aktionspunkte){
+                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
                     held.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")

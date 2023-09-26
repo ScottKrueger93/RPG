@@ -63,7 +63,7 @@ class Helfer(
                 println("${gegner.name} hat jetzt ${gegner.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(gegner.aktionspunkte - attacke.aktionsPunkteKosten > gegner.aktionspunkte){
+                if(gegner.aktionspunkte > gegner.aktionspunkte - attacke.aktionsPunkteKosten){
                     gegner.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
