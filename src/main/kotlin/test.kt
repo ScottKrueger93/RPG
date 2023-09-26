@@ -30,10 +30,34 @@ fun main() {
     var istVerbuendeterZiel: Boolean
     var istGegnerZiel: Boolean
 
+    fun story() {
+        println()
+        Thread.sleep(5000)
+        println("Durch zahlreiche Herausforderungen haben sich drei tapfere Helden bewiesen den dunklen Mächten der Welt zu trotzen.")
+        Thread.sleep(5000)
+        println("Eren das Bollwerk, welcher mit seinem mächtigen Schild und durch schier unmenschliche Stärke es mit einer Armee von 20 Mann alleine aufnehmen konnte.")
+        Thread.sleep(5000)
+        println("Jutzius, von dem man sagt, er wurde von den Heiligen selbst, den Göttern des Lichts, auf die Welt gesandt.")
+        Thread.sleep(5000)
+        println("Und Ezekiel, ein mächtiger Magier des Zirkels der drei Zauberer.")
+        Thread.sleep(5000)
+        println()
+        println("Lange zeit war unklar wie die mächte des Bösen, in die Heiligen Hauptstädte der Heiligen Ordnung einfallen konnten und diese einen nach dem anderen einnehmen konnten.")
+        Thread.sleep(5000)
+        println(
+            "Doch nach dem sich die Gruppe aus den drei Helden auf eine lange Reise begaben die dringend benötigte Wende in diesem Krieg herbeizuführen, machten sie eine abscheuliche entdeckung." +
+                    " Der Erzbischof, der engste berater des Obersten Bischoffs der Heiligen Kirsche, war in wirklichkeit der Nekromant Ankylar, welcher über die Jahre hin weg getarnt Informationen weitergab und dafür verantwortlich war das hunderte Mitglieder des Heiligen Ordens spurlos verschwanden."
+        )
+        Thread.sleep(5000)
+        println("Unsere tapferen Helden schließen sich zu einem letzten Kampf zusammen um dem Befehlshaber der Dunklen Legionen einhalt zu bieten...")
+    }
+
     fun kampfBeginnt() {
+        Thread.sleep(5000)
         println()
         println("Deine Truppe besteht aus folgenden Helden, mit den angezeigten Werten und Fähigkeiten:")
         println()
+        Thread.sleep(5000)
         for (held in haeldenListe) {
             println(
                 """
@@ -44,7 +68,9 @@ fun main() {
                 """.trimIndent()
             )
             println()
-            println(""" 
+            Thread.sleep(5000)
+            println(
+                """ 
                  Fähigkeiten: 
                  
                  Name:      ${held.aktion1.name}                | Name:      ${held.aktion2.name}                | Name:      ${held.aktion3.name}                | Name:      ${held.aktion4.name}
@@ -52,28 +78,40 @@ fun main() {
                  Heilung+:  ${held.aktion1.heilung}             | Heilung+:  ${held.aktion2.heilung}             | Heilung+:  ${held.aktion3.heilung}             | Heilung+:  ${held.aktion4.heilung}
                  Rüstung+:  ${held.aktion1.ruestungPlus}        | Rüstung+:  ${held.aktion2.ruestungPlus}        | Rüstung+:  ${held.aktion3.ruestungPlus}        | Rüstung+:  ${held.aktion4.ruestungPlus}
                  AP-Kosten: ${held.aktion1.aktionsPunkteKosten} | AP-Kosten: ${held.aktion2.aktionsPunkteKosten} | AP-Kosten: ${held.aktion3.aktionsPunkteKosten} | AP-Kosten: ${held.aktion4.aktionsPunkteKosten}
-            """.trimIndent())
+            """.trimIndent()
+            )
+            println()
+            Thread.sleep(5000)
         }
         println("Wiederbelebung, belebt Helden.")
+        println()
+        Thread.sleep(5000)
         println("Spott, zwingt einen Gegner bei seinem nächsten Angriff, den jeweiligen Helden anzugreifen.")
-
         println()
+        Thread.sleep(5000)
         println("Der finale Kampf beginnt!")
-        println()
     }
 
-    fun aktuellerStatusHeld(istAmZug: Held){
-        println("""
+    fun aktuellerStatusHeld(istAmZug: Held) {
+        println()
+        Thread.sleep(5000)
+        println(
+            """
                 Status des Helden
                 
                 Name: ${istAmZug.name}
                 Lebenspunkte (LP): ${istAmZug.lebenspunkte}
                 Aktionspunkte (AP):${istAmZug.aktionspunkte} 
                 Rüstung: ${istAmZug.ruestungsPunkte}
-        """.trimIndent())
+        """.trimIndent()
+        )
+        println()
+        Thread.sleep(5000)
     }
 
     fun schadenUberZeitBerechnung(held: Held) {
+        println()
+        Thread.sleep(5000)
         if (held.hatSchadenUeberZeitMalus) {
             if (held.lebenspunkte <= (held.standardLebenspunkte * 20 / 100)) {
                 held.hatSchadenUeberZeitMalus = false
@@ -81,8 +119,12 @@ fun main() {
             } else {
                 val verseuchungsSchaden = held.lebenspunkte * 10 / 100
                 held.lebenspunkte -= verseuchungsSchaden
+                println()
+                Thread.sleep(5000)
                 println("${held.name} leidet an Verseuchung.")
+                Thread.sleep(5000)
                 println("Verseuchung verursacht an ${held.name} $verseuchungsSchaden Schaden.")
+                Thread.sleep(5000)
                 println("${held.name} hat jetzt ${held.lebenspunkte} Lebenspunkte.")
             }
         }
@@ -94,12 +136,17 @@ fun main() {
         hatBereitsGekaempftHeld: MutableList<Held>,
         heldIstTot: MutableList<Held>,
     ) {
+        println()
+        Thread.sleep(5000)
         if (haeldenListe.isNotEmpty()) {
             if (held.lebenspunkte <= 0) {
+                println("${held.name} ist gestorben.")
                 heldIstTot.add(held)
                 haeldenListe.remove(held)
             }
         }
+        println()
+        Thread.sleep(5000)
         if (hatBereitsGekaempftHeld.isNotEmpty()) {
             if (held.lebenspunkte <= 0) {
                 heldIstTot.add(held)
@@ -114,12 +161,16 @@ fun main() {
         hatBereitsGekaempftGegner: MutableList<Gegner>,
         gegnerIstTot: MutableList<Gegner>,
     ) {
+        println()
+        Thread.sleep(5000)
         if (gegnerListe.isNotEmpty()) {
             if (gegner.lebenspunkte < 0) {
                 gegnerIstTot.add(gegner)
                 gegnerListe.remove(gegner)
             }
         }
+        println()
+        Thread.sleep(5000)
         if (hatBereitsGekaempftGegner.isNotEmpty()) {
             if (gegner.lebenspunkte < 0) {
                 gegnerIstTot.add(gegner)
@@ -129,6 +180,8 @@ fun main() {
     }
 
     fun zielAuswahlDesSpielers() {
+        println()
+        Thread.sleep(5000)
         println("Was möchtest du als Ziel auswählen?")
         println(
             """1 für Helden
@@ -138,6 +191,8 @@ fun main() {
         val heldenOderGegnerEingabe = readln().toInt()
         if (heldenOderGegnerEingabe == 1) {
             haeldenListe.addAll(hatBereitsGekaempftHeld)
+            println()
+            Thread.sleep(5000)
             println("Welchen Helden möchtest du als Ziel auswählen?")
             for ((index: Int, held: Held) in haeldenListe.withIndex()) {
                 println(
@@ -146,6 +201,8 @@ fun main() {
                 """.trimIndent()
                 )
             }
+            println()
+            Thread.sleep(5000)
             val zielSpielerEingabe = readln().toInt()
             zielVerbuendeter = haeldenListe[zielSpielerEingabe - 1]
             istVerbuendeterZiel = true
@@ -171,15 +228,21 @@ fun main() {
     }
 
     fun zielAuswahlDesGegners(istAmZugGegner: Gegner) {
+        println()
+        Thread.sleep(5000)
         if (istAmZugGegner.hatSpott) {
             println("${istAmZugGegner.name} wurde gespottet.")
             zielHeld = krieger
+            println()
+            Thread.sleep(5000)
             println("${istAmZugGegner.name} wählt ${krieger.name} als sein Ziel aus.")
         } else {
             println("${istAmZugGegner.name} wählt ein Ziel zum Angreifen...")
             haeldenListe.addAll(hatBereitsGekaempftHeld)
             val zielGegnerEingabe = haeldenListe.random()
             zielHeld = zielGegnerEingabe
+            println()
+            Thread.sleep(5000)
             println("${istAmZugGegner.name} wählt ${zielGegnerEingabe.name} als sein Ziel aus.")
             haeldenListe.removeAll(hatBereitsGekaempftHeld)
         }
@@ -222,12 +285,14 @@ fun main() {
     }
 
     fun rundenKaempfe(haeldenListe: MutableList<Held>, gegnerListe: MutableList<Gegner>) {
+        story()
         kampfBeginnt()
         var istAmZugHeld: Held
         var istAmZugGegner: Gegner
         while (krieger.lebenspunkte > 0 && magier.lebenspunkte > 0 && heiler.lebenspunkte > 0 || endBoss.lebenspunkte > 0 && helfer.lebenspunkte > 0) {
             while (haeldenListe.isNotEmpty()) {
                 istAmZugHeld = haeldenListe.random()
+                aktuellerStatusHeld(istAmZugHeld)
                 schadenUberZeitBerechnung(istAmZugHeld)
                 istAmZugHeld.aktionspunkte = minOf(istAmZugHeld.standardAktionspunkte, istAmZugHeld.aktionspunkte + 20)
                 haeldenListe.remove(istAmZugHeld)
@@ -237,7 +302,11 @@ fun main() {
                 istAmZugHeld.aktion4.schaden = istAmZugHeld.aktion4.standardSchaden
                 istVerbuendeterZiel = false
                 istGegnerZiel = false
+                println()
+                Thread.sleep(5000)
                 println("${istAmZugHeld.name} ist an der Reihe.")
+                println()
+                Thread.sleep(5000)
                 do {
                     println("Was möchtest du tun?")
                     println(
@@ -283,6 +352,8 @@ fun main() {
                     minOf(istAmZugGegner.standardAktionspunkte, istAmZugGegner.aktionspunkte + 20)
                 gegnerListe.remove(istAmZugGegner)
                 hatBereitsGekaempftGegner.add(istAmZugGegner)
+                println()
+                Thread.sleep(5000)
                 println("${istAmZugGegner.name} ist an der Reihe.")
                 zielAuswahlDesGegners(istAmZugGegner)
                 gegnerUeberPruefungGegenHelden(istAmZugGegner, zielHeld)
