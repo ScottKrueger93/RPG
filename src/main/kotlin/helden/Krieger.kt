@@ -44,6 +44,10 @@ class Krieger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+                println("Ungültige Eingabe.")
+                angreifenKriegerGegner(held, gegner)
+            }
             val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
@@ -69,26 +73,35 @@ class Krieger(
                 println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
             }
             if (attacke.ruestungPlus > 0) {
-                if (attacke.name == "Spott") {
-                    spott(attacke, held, gegner)
-                    held.ruestungsPunkte += attacke.ruestungPlus
-                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
-                }
-                else if (attacke.name == "Schützendes Schild") {
-                    held.ruestungsPunkte += attacke.ruestungPlus
-                    println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
-                } else {
-                    held.ruestungsPunkte += attacke.ruestungPlus
-                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                when (attacke.name) {
+                    "Spott" -> {
+                        spott(attacke, held, gegner)
+                        held.ruestungsPunkte += attacke.ruestungPlus
+                        println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                        println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                    }
+                    "Schützendes Schild" -> {
+                        held.ruestungsPunkte += attacke.ruestungPlus
+                        println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                        println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                    }
+                    else -> {
+                        held.ruestungsPunkte += attacke.ruestungPlus
+                        println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                        println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                    }
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                held.aktionspunkte -= attacke.aktionsPunkteKosten
-                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                if(held.aktionspunkte - attacke.aktionsPunkteKosten > held.aktionspunkte){
+                    held.aktionspunkte -= attacke.aktionsPunkteKosten
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                } else {
+                    held.aktionspunkte = held.standardAktionspunkte
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                }
             }
             aktionspunkteReichenAus = true
         }
@@ -107,6 +120,10 @@ class Krieger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+                println("Ungültige Eingabe.")
+                angreifenKriegerVerbuendeter(held, verbuendeter)
+            }
             val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
@@ -125,7 +142,6 @@ class Krieger(
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.lebenspunkte} Lebenspunkte.")
                 }
-
             }
             if (attacke.heilung > 0) {
                 verbuendeter.lebenspunkte += attacke.heilung
@@ -133,26 +149,35 @@ class Krieger(
                 println("${verbuendeter.name} hat jetzt ${verbuendeter.lebenspunkte} Lebenspunkte.")
             }
             if (attacke.ruestungPlus > 0) {
-                if (attacke.name == "Spott") {
-                    println("${held.name} Spottet über ${verbuendeter.name}. Dieser ist unbeeindruckt.")
-                    held.ruestungsPunkte += attacke.ruestungPlus
-                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
-                }
-                else if (attacke.name == "Schützendes Schild") {
-                    held.ruestungsPunkte += attacke.ruestungPlus
-                    println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
-                } else {
-                    held.ruestungsPunkte += attacke.ruestungPlus
-                    println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
-                    println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                when (attacke.name) {
+                    "Spott" -> {
+                        println("${held.name} Spottet über ${verbuendeter.name}. Dieser ist unbeeindruckt.")
+                        held.ruestungsPunkte += attacke.ruestungPlus
+                        println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                        println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                    }
+                    "Schützendes Schild" -> {
+                        held.ruestungsPunkte += attacke.ruestungPlus
+                        println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                        println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                    }
+                    else -> {
+                        held.ruestungsPunkte += attacke.ruestungPlus
+                        println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
+                        println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
+                    }
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                held.aktionspunkte -= attacke.aktionsPunkteKosten
-                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                if(held.aktionspunkte - attacke.aktionsPunkteKosten > held.aktionspunkte){
+                    held.aktionspunkte -= attacke.aktionsPunkteKosten
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                } else {
+                    held.aktionspunkte = held.standardAktionspunkte
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                }
             }
             aktionspunkteReichenAus = true
         }

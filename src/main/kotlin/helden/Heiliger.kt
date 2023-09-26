@@ -44,6 +44,10 @@ class Heiliger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+                println("Ungültige Eingabe.")
+                angreifenHeilerGegner(held, gegner)
+            }
             val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
@@ -81,9 +85,15 @@ class Heiliger(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                held.aktionspunkte -= attacke.aktionsPunkteKosten
-                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                if(held.aktionspunkte - attacke.aktionsPunkteKosten > held.aktionspunkte){
+                    held.aktionspunkte -= attacke.aktionsPunkteKosten
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                } else {
+                    held.aktionspunkte = held.standardAktionspunkte
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                }
             }
             aktionspunkteReichenAus = true
         }
@@ -102,6 +112,10 @@ class Heiliger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+                println("Ungültige Eingabe.")
+                angreifenHeilerVerbuendeter(held, verbuendeter, heldIstTot, hatBereitsGekaempftListe)
+            }
             val attacke = attackenListe[attackenEingabe - 1]
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
@@ -169,15 +183,19 @@ class Heiliger(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                //TODO: AP dürfen nicht unter 0 fallen können
-                held.aktionspunkte -= attacke.aktionsPunkteKosten
-                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                if(held.aktionspunkte - attacke.aktionsPunkteKosten > held.aktionspunkte){
+                    held.aktionspunkte -= attacke.aktionsPunkteKosten
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                } else {
+                    held.aktionspunkte = held.standardAktionspunkte
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                }
             }
             aktionspunkteReichenAus = true
         }
     }
-
 
     private fun wiederbelebung(toterHeld: Held, hatBereitsGekaempftListe: MutableList<Held>, heldIstTot: MutableList<Held>){
         println("${toterHeld.name} wird Wiederbelebt.")

@@ -93,9 +93,15 @@ class Endgegner(
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                gegner.aktionspunkte -= attacke.aktionsPunkteKosten
-                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
+                if(gegner.aktionspunkte - attacke.aktionsPunkteKosten > gegner.aktionspunkte){
+                    gegner.aktionspunkte -= attacke.aktionsPunkteKosten
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
+                } else {
+                    gegner.aktionspunkte = gegner.standardAktionspunkte
+                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                    println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
+                }
             }
             aktionspunkteReichenAus = true
             gegner.hatSpott = false

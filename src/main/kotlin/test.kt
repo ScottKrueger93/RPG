@@ -205,6 +205,10 @@ fun main() {
                 """.trimMargin()
                     )
                     val eingabe = readln().toInt()
+                    if (eingabe != 1 && eingabe != 2){
+                        println("Ungültige Eingabe.")
+                        continue
+                    }
                     if (eingabe == 1) {
                         if (beutel.items.isEmpty()) {
                             println("Du hast keine Items mehr.")
