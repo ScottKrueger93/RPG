@@ -11,7 +11,7 @@ open class Held(
     var standardAktionspunkte: Int = 100,
     var ruestungsPunkte: Int = 0,
     var aktion1: Faehigkeit,
-    aktion2: Faehigkeit,
+    var aktion2: Faehigkeit,
     var aktion3: Faehigkeit,
     var aktion4: Faehigkeit,
     var hatSchadenUeberZeitMalus: Boolean,

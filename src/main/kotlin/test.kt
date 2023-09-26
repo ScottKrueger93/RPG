@@ -31,13 +31,46 @@ fun main() {
     var istGegnerZiel: Boolean
 
     fun kampfBeginnt() {
-
-        for (held in haeldenListe){
-            println("")
+        println()
+        println("Deine Truppe besteht aus folgenden Helden, mit den angezeigten Werten und Fähigkeiten:")
+        println()
+        for (held in haeldenListe) {
+            println(
+                """
+                Name:               ${held.name} 
+                Lebenspunkte (LP):  ${held.lebenspunkte} 
+                Aktionspunkte (AP): ${held.aktionspunkte} 
+                Rüstung:            ${held.ruestungsPunkte}
+                """.trimIndent()
+            )
+            println()
+            println(""" 
+                 Fähigkeiten: 
+                 
+                 Name:      ${held.aktion1.name}                | Name:      ${held.aktion2.name}                | Name:      ${held.aktion3.name}                | Name:      ${held.aktion4.name}
+                 Schaden:   ${held.aktion1.schaden}             | Schaden:   ${held.aktion2.schaden}             | Schaden:   ${held.aktion3.schaden}             | Schaden:   ${held.aktion4.schaden}
+                 Heilung+:  ${held.aktion1.heilung}             | Heilung+:  ${held.aktion2.heilung}             | Heilung+:  ${held.aktion3.heilung}             | Heilung+:  ${held.aktion4.heilung}
+                 Rüstung+:  ${held.aktion1.ruestungPlus}        | Rüstung+:  ${held.aktion2.ruestungPlus}        | Rüstung+:  ${held.aktion3.ruestungPlus}        | Rüstung+:  ${held.aktion4.ruestungPlus}
+                 AP-Kosten: ${held.aktion1.aktionsPunkteKosten} | AP-Kosten: ${held.aktion2.aktionsPunkteKosten} | AP-Kosten: ${held.aktion3.aktionsPunkteKosten} | AP-Kosten: ${held.aktion4.aktionsPunkteKosten}
+            """.trimIndent())
         }
+        println("Wiederbelebung, belebt Helden.")
+        println("Spott, zwingt einen Gegner bei seinem nächsten Angriff, den jeweiligen Helden anzugreifen.")
 
         println()
         println("Der finale Kampf beginnt!")
+        println()
+    }
+
+    fun aktuellerStatusHeld(istAmZug: Held){
+        println("""
+                Status des Helden
+                
+                Name: ${istAmZug.name}
+                Lebenspunkte (LP): ${istAmZug.lebenspunkte}
+                Aktionspunkte (AP):${istAmZug.aktionspunkte} 
+                Rüstung: ${istAmZug.ruestungsPunkte}
+        """.trimIndent())
     }
 
     fun schadenUberZeitBerechnung(held: Held) {
@@ -157,9 +190,11 @@ fun main() {
             magier -> {
                 held.angreifenMagierGegner(held, gegner)
             }
+
             heiler -> {
                 held.angreifenHeilerGegner(held, gegner)
             }
+
             krieger -> held.angreifenKriegerGegner(held, gegner)
         }
     }
@@ -177,9 +212,11 @@ fun main() {
             magier -> {
                 magier.angreifenMagierVerbuendeter(held, zielHeld)
             }
+
             heiler -> {
-                heiler.angreifenHeilerVerbuendeter(held, zielHeld, heldIstTot,hatBereitsGekaempftHeld)
+                heiler.angreifenHeilerVerbuendeter(held, zielHeld, heldIstTot, hatBereitsGekaempftHeld)
             }
+
             krieger -> krieger.angreifenKriegerVerbuendeter(held, zielHeld)
         }
     }
@@ -210,7 +247,7 @@ fun main() {
                 """.trimMargin()
                     )
                     val eingabe = readln().toInt()
-                    if (eingabe != 1 && eingabe != 2){
+                    if (eingabe != 1 && eingabe != 2) {
                         println("Ungültige Eingabe.")
                         continue
                     }
