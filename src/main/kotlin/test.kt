@@ -32,6 +32,11 @@ fun main() {
 
     fun kampfBeginnt() {
 
+        for (held in haeldenListe){
+            println("")
+        }
+
+        println()
         println("Der finale Kampf beginnt!")
     }
 
@@ -216,7 +221,8 @@ fun main() {
                         } else {
                             beutel.itemAuswaehlen().itemNutzen(istAmZugHeld)
                         }
-                    } else if (eingabe == 2) {
+                    }
+                    if (eingabe == 2) {
                         zielAuswahlDesSpielers()
                     }
                 } while (eingabe != 2)
