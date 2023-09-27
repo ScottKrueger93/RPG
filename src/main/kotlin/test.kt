@@ -4,32 +4,41 @@ import helden.*
 
 fun main() {
 
-    //Die Unterklassen von der Mutterklasse "Held"
+    //Die Unterklassen von der Mutterklasse "Held" werden Inztanziert
     val krieger = Krieger()
     val magier = Magier()
     val heiler = Heiliger()
 
-    //Die Unterklassen von der Mutterklasse "Gegner"
+    //Die Unterklassen von der Mutterklasse "Gegner" werden Inztanziert
     val endBoss = Endgegner()
     val helfer = Helfer()
 
-    // Klasse "Beutel"
+    // Klasse "Beutel" wird Inztanziert
     val beutel = Beutel()
 
-    // Liste für die Rundenkämpfe
-    val haeldenListe = mutableListOf(krieger, magier, heiler)
-    val gegnerListe: MutableList<Gegner> = mutableListOf(endBoss)
-    val hatBereitsGekaempftHeld: MutableList<Held> = mutableListOf()
-    val hatBereitsGekaempftGegner: MutableList<Gegner> = mutableListOf()
-    val heldIstTot: MutableList<Held> = mutableListOf()
-    val gegnerIstTot: MutableList<Gegner> = mutableListOf()
+    // Listen für die Rundenkämpfe werden gespeichert
+    val haeldenListe =
+        mutableListOf(krieger, magier, heiler)   // Liste in der die Helden sind, die noch nicht am Zug waren
+    val gegnerListe: MutableList<Gegner> =
+        mutableListOf(endBoss)               // Liste in der die Gegner sind, die noch nicht am Zug waren
+    val hatBereitsGekaempftHeld: MutableList<Held> =
+        mutableListOf()            // Liste in der die Helden sind, die schon am Zug waren
+    val hatBereitsGekaempftGegner: MutableList<Gegner> =
+        mutableListOf()        // Liste in der die Gegner sind, die schon am Zug waren
+    val heldIstTot: MutableList<Held> =
+        mutableListOf()                         // Liste in der später die toten Helden kommen
+    val gegnerIstTot: MutableList<Gegner> =
+        mutableListOf()                     // Liste in der später die toten Gegner kommen
 
-    var zielGegner = gegnerListe[0]
-    var zielHeld = haeldenListe[0]
-    var zielVerbuendeter = haeldenListe[0]
-    var istVerbuendeterZiel: Boolean
-    var istGegnerZiel: Boolean
+    var zielGegner =
+        gegnerListe[0]         // später wird hier das Ziel des Helden eingefügt, durch eine Spieler-Eingabe
+    var zielHeld = haeldenListe[0]            // später wird hier das Ziel des Gegners per Zufall eingefügt
+    var zielVerbuendeter =
+        haeldenListe[0]    // später wird hier das Ziel des Helden, welcher einen Helden angreifen soll eingefügt, durch eine Spieler-Eingabe
+    var istVerbuendeterZiel: Boolean                // variable wird später auf "true" gesetzt, wenn der Spieler einen Verbündeten Helden Angreifen will
+    var istGegnerZiel: Boolean                      // variable wird später auf "true" gesetzt, wenn der Spieler einen Gegner Angreifen will
 
+    // Leitet eine Story zum Spiel ein.
     fun story() {
         println()
         Thread.sleep(2000)
@@ -59,6 +68,7 @@ fun main() {
         println("Unsere tapferen Helden schließen sich zu einem letzten Kampf zusammen um dem Befehlshaber der Dunklen Legionen einhalt zu bieten...")
     }
 
+    // Gibt eine Übersicht zu allen Helden und dessen Fähigkeiten aus.
     fun kampfBeginnt() {
         Thread.sleep(5000)
         println()
@@ -128,6 +138,10 @@ fun main() {
         println("Der finale Kampf beginnt!")
     }
 
+    /**
+     * @fun gibt zu jedem Rundenbeginn den aktuellen Status der Werte des Helden aus, der am Zug ist.
+     * @param istAmZug der Held, welcher aktuell in der Runde an der Reihe ist, wird eingesetzt.
+     */
     fun aktuellerStatusHeld(istAmZug: Held) {
         println()
         Thread.sleep(5000)
@@ -144,6 +158,10 @@ fun main() {
         Thread.sleep(5000)
     }
 
+    /**
+     * @fun prüft, ob ein Held vom Angriff des Bosses, welcher Schaden über Zeit macht, betroffen ist und wenn ja, dann berechnet er den Schaden.
+     * @param held hier wird der Held, welcher aktuell an der Reihe ist eingesetzt, welcher dann überprüft wird.
+     */
     fun schadenUberZeitBerechnung(held: Held) {
         if (held.hatSchadenUeberZeitMalus) {
             if (held.lebenspunkte <= (held.standardLebenspunkte * 20 / 100)) {
@@ -167,6 +185,13 @@ fun main() {
         }
     }
 
+    /**
+     * @fun nach einem Angriff des Helden oder des Gegners wird überprüft, ob ein Held tot ist, und wenn ja, dann wird dieser zur Liste der toten Helden hinzugefügt und aus den anderen Listen entfernt.
+     * @param held hier wird der Held, welcher angegriffen wurde eingesetzt.
+     * @param haeldenListe Liste der Helden, welche noch am Zug sein können, wird eingesetzt und überprüft, ob darin ein Held ist, der Tot ist.
+     * @param hatBereitsGekaempftHeld Liste der Helden, welche schon am Zug waren, wird eingesetzt und überprüft, ob darin ein Held ist, der Tot ist.
+     * @param heldIstTot hier wird die Liste der Toten Helden eingesetzt.
+     */
     fun zurHeldIstTotListe(
         held: Held,
         haeldenListe: MutableList<Held>,
@@ -193,6 +218,13 @@ fun main() {
         }
     }
 
+    /**
+     * @fun nach einem Angriff von einer der Helden wird überprüft, ob ein Gegner tot ist, und wenn ja, dann wird dieser zur Liste der toten Gegner hinzugefügt und aus den anderen Listen entfernt.
+     * @param gegner hier wird der Gegner, welcher angegriffen wurde eingesetzt.
+     * @param gegnerListe Liste der Gegner, welche noch am Zug sein können, wird eingesetzt und überprüft, ob darin ein Gegner ist, der Tot ist.
+     * @param hatBereitsGekaempftGegner Liste der Gegner, welche schon am Zug waren, wird eingesetzt und überprüft, ob darin ein Gegner ist, der Tot ist.
+     * @param gegnerIstTot hier wird die Liste der Toten Gegner eingesetzt.
+     */
     fun zurGegnerIstTotListe(
         gegner: Gegner,
         gegnerListe: MutableList<Gegner>,
@@ -219,6 +251,7 @@ fun main() {
         }
     }
 
+    //  Ermöglicht dem Spieler das Auswählen eines Verbündeten oder eines Gegners als Ziel
     fun zielAuswahlDesSpielers() {
         println()
         println("Was möchtest du als Ziel auswählen?")
@@ -268,6 +301,11 @@ fun main() {
         }
     }
 
+    /**
+     * @fun prüft als erstes, ob der Spieler mit einem Helden "Spott" eingesetzt hat und wenn ja, wird dieser Held als Ziel für den Angriff des Gegners ausgewählt.
+     *      Wenn nein, dann wird das Ziel des Gegners zufällig ausgewählt.
+     * @param istAmZugGegner der aktuelle Gegner, welcher am Zug ist, wird eingesetzt
+     */
     fun zielAuswahlDesGegners(istAmZugGegner: Gegner) {
         println()
         Thread.sleep(5000)
@@ -289,6 +327,11 @@ fun main() {
         }
     }
 
+    /**
+     * @fun überprüft, welcher Typ Held einen Angriff gegen einen Gegner ausführt und führt die entsprechende Methode der Class aus
+     * @param held aktuelle Held, welcher am Zug ist, wird eingesetzt.
+     * @param gegner der Gegner, welchen der Spieler zuvor ausgewählt hat, wird eingesetzt.
+     */
     fun heldenUeberPruefungGegenGegner(held: Held, gegner: Gegner) {
         when (held) {
             magier -> {
@@ -303,6 +346,11 @@ fun main() {
         }
     }
 
+    /**
+     * @fun überprüft, welcher Typ Gegner einen Angriff gegen einen Helden ausführt und führt die entsprechende Methode der Class aus
+     * @param gegner aktuelle Gegner, welcher am Zug ist, wird eingesetzt.
+     * @param held der Held, welchen der Gegner zuvor zufällig ausgewählt hat, wird eingesetzt.
+     */
     fun gegnerUeberPruefungGegenHelden(gegner: Gegner, held: Held) {
         if (gegner == endBoss) {
             gegner.bossAngriff(gegner, held, helfer, gegnerListe, hatBereitsGekaempftHeld, gegnerIstTot)
@@ -311,6 +359,11 @@ fun main() {
         }
     }
 
+    /**
+     * @fun überprüft, welcher Typ Held einen Angriff gegen einen verbündeten Helden ausführt und führt die entsprechende Methode der Class aus
+     * @param held aktuelle Held, welcher am Zug ist, wird eingesetzt.
+     * @param zielHeld der Held, welchen der Spieler zuvor ausgewählt hat, wird eingesetzt.
+     */
     fun heldenUeberPruefungGegenVerbuendete(held: Held, zielHeld: Held) {
         when (held) {
             magier -> {
@@ -325,6 +378,11 @@ fun main() {
         }
     }
 
+    /**
+     * @fun Die Kampfphase des Spiels wird ausgeführt. Enthält außerdem alle Funktionen und damit auch alle Methoden der Classes.
+     * @param haeldenListe Liste der Helden, welche noch nicht am Zug waren, wird eingesetzt.
+     * @param gegnerListe Liste der Gegner, welche noch nicht am Zug waren, wird eingesetzt.
+     */
     fun rundenKaempfe(haeldenListe: MutableList<Held>, gegnerListe: MutableList<Gegner>) {
         story()
         kampfBeginnt()
@@ -338,12 +396,12 @@ fun main() {
                 println("${istAmZugHeld.name} ist an der Reihe.")
                 aktuellerStatusHeld(istAmZugHeld)
                 schadenUberZeitBerechnung(istAmZugHeld)
-                istAmZugHeld.aktionspunkte = minOf(istAmZugHeld.standardAktionspunkte, istAmZugHeld.aktionspunkte + 20)
+                istAmZugHeld.aktionspunkte = minOf(istAmZugHeld.standardAktionspunkte, istAmZugHeld.aktionspunkte + 20) // Aktionspunkte des Helden, welcher am Zug ist, werden + 20 erhöht. Kann nicht höher als die Standardaktionspunkte liegen.
                 haeldenListe.remove(istAmZugHeld)
                 hatBereitsGekaempftHeld.add(istAmZugHeld)
-                istAmZugHeld.aktion1.schaden = istAmZugHeld.aktion1.standardSchaden
-                istAmZugHeld.aktion3.schaden = istAmZugHeld.aktion3.standardSchaden
-                istAmZugHeld.aktion4.schaden = istAmZugHeld.aktion4.standardSchaden
+                istAmZugHeld.aktion1.schaden = istAmZugHeld.aktion1.standardSchaden     // Wenn der Held zuvor ein Item einsetzt, was seinen Schaden erhöht, wird hiermit der Schaden auf den Standardwert zurückgesetzt
+                istAmZugHeld.aktion3.schaden = istAmZugHeld.aktion3.standardSchaden     // Wenn der Held zuvor ein Item einsetzt, was seinen Schaden erhöht, wird hiermit der Schaden auf den Standardwert zurückgesetzt
+                istAmZugHeld.aktion4.schaden = istAmZugHeld.aktion4.standardSchaden     // Wenn der Held zuvor ein Item einsetzt, was seinen Schaden erhöht, wird hiermit der Schaden auf den Standardwert zurückgesetzt
                 istVerbuendeterZiel = false
                 istGegnerZiel = false
                 Thread.sleep(5000)
