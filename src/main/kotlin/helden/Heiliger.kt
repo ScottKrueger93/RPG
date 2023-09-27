@@ -44,7 +44,7 @@ class Heiliger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
                 println("Ungültige Eingabe.")
                 angreifenHeilerGegner(held, gegner)
             }
@@ -54,7 +54,7 @@ class Heiliger(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (gegner.ruestungsPunkte - attacke.schaden > 0) {
+                if (gegner.ruestungsPunkte - attacke.schaden >= 0) {
                     gegner.ruestungsPunkte -= attacke.schaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
@@ -68,15 +68,15 @@ class Heiliger(
                 }
             }
             if (attacke.heilung > 0) {
-                if (attacke.name == "Engelsrettung (Wiederbelebung)"){
+                if (attacke.name == "Engelsrettung (Wiederbelebung)") {
                     println("${held.name} bestraft mit der Heiligen Macht der Engel ${gegner.name}.")
                     gegner.lebenspunkte -= attacke.heilung
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.heilung} Schaden.")
                     println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
                 } else {
-                gegner.lebenspunkte -= attacke.heilung
-                println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.heilung} Schaden.")
-                println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
+                    gegner.lebenspunkte -= attacke.heilung
+                    println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.heilung} Schaden.")
+                    println("${gegner.name} hat jetzt ${gegner.lebenspunkte} Lebenspunkte.")
                 }
             }
             if (attacke.ruestungPlus > 0) {
@@ -85,21 +85,20 @@ class Heiliger(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
-                    held.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                } else {
-                    held.aktionspunkte = held.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                }
+                held.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
         }
     }
 
-    override fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held, heldIstTot: MutableList<Held>, hatBereitsGekaempftListe: MutableList<Held>) {
+    override fun angreifenHeilerVerbuendeter(
+        held: Held,
+        verbuendeter: Held,
+        heldIstTot: MutableList<Held>,
+        hatBereitsGekaempftListe: MutableList<Held>,
+    ) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {
@@ -112,7 +111,7 @@ class Heiliger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
                 println("Ungültige Eingabe.")
                 angreifenHeilerVerbuendeter(held, verbuendeter, heldIstTot, hatBereitsGekaempftListe)
             }
@@ -122,7 +121,7 @@ class Heiliger(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (verbuendeter.ruestungsPunkte - attacke.schaden > 0) {
+                if (verbuendeter.ruestungsPunkte - attacke.schaden >= 0) {
                     verbuendeter.ruestungsPunkte -= attacke.schaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
@@ -137,14 +136,14 @@ class Heiliger(
 
             }
             if (attacke.heilung > 0) {
-                if (attacke.name == "Engelsrettung (Wiederbelebung)"){
-                    if (heldIstTot.isEmpty()){
+                if (attacke.name == "Engelsrettung (Wiederbelebung)") {
+                    if (heldIstTot.isEmpty()) {
                         println("Alle Helden sind am Leben.")
-                        angreifenHeilerVerbuendeter(held,verbuendeter,heldIstTot,hatBereitsGekaempftListe)
+                        angreifenHeilerVerbuendeter(held, verbuendeter, heldIstTot, hatBereitsGekaempftListe)
                     } else {
                         println("Welchen Helden willst du Wiederbeleben?")
-                        for ((index: Int, toterHeld: Held) in heldIstTot.withIndex()){
-                            println("${index+1} für ${toterHeld.name}")
+                        for ((index: Int, toterHeld: Held) in heldIstTot.withIndex()) {
+                            println("${index + 1} für ${toterHeld.name}")
                         }
                         try {
                             val spielerauswahlFuerWiederbelebung = readln().toInt()
@@ -154,17 +153,16 @@ class Heiliger(
                                 if (heldIstTot.size < 2) {
                                     println("Ungültige Eingabe.")
                                     continue
-                                }else{
+                                } else {
                                     wiederbelebung(heldIstTot[1], hatBereitsGekaempftListe, heldIstTot)
                                 }
                             }
-                        }catch (e: Exception){
+                        } catch (e: Exception) {
                             println("Ungültige Eingabe.")
                             continue
                         }
                     }
-                }
-                else if (held.lebenspunkte + attacke.heilung > held.standardLebenspunkte) {
+                } else if (held.lebenspunkte + attacke.heilung > held.standardLebenspunkte) {
                     println(
                         "Die Lebenspunkte von ${held.name} werden um ${held.standardLebenspunkte - held.lebenspunkte} geheilt. " +
                                 "Die Überheilung beträgt ${held.lebenspunkte + attacke.heilung - held.standardLebenspunkte}." +
@@ -183,21 +181,19 @@ class Heiliger(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
-                    held.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                } else {
-                    held.aktionspunkte = held.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                }
+                held.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
         }
     }
 
-    private fun wiederbelebung(toterHeld: Held, hatBereitsGekaempftListe: MutableList<Held>, heldIstTot: MutableList<Held>){
+    private fun wiederbelebung(
+        toterHeld: Held,
+        hatBereitsGekaempftListe: MutableList<Held>,
+        heldIstTot: MutableList<Held>,
+    ) {
         println("${toterHeld.name} wird Wiederbelebt.")
         hatBereitsGekaempftListe.add(toterHeld)
         heldIstTot.remove(toterHeld)

@@ -71,6 +71,7 @@ class Beutel(
                 return itemAuswaehlen()
             }
         }
+        println()
         val item = items[itemEingabe - 1]
         items.remove(item)
         return item

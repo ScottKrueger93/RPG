@@ -10,7 +10,7 @@ class Krieger(
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
     ruestungsPunkte: Int = 500,
-    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 100, 100, 0, 0, 0),
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 150, 1000, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Spott", 0, 0, 0, 150, 50),
     aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 0, 250, 50),
@@ -54,7 +54,7 @@ class Krieger(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (gegner.ruestungsPunkte - attacke.schaden > 0) {
+                if (gegner.ruestungsPunkte - attacke.schaden >= 0) {
                     gegner.ruestungsPunkte -= attacke.schaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
@@ -64,6 +64,7 @@ class Krieger(
                     gegner.ruestungsPunkte = verbleibendeRuestung
                     gegner.lebenspunkte -= verbeibenderSchaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
+                    println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstungspunkte.")
                     println("${gegner.name} hat jetzt noch ${gegner.lebenspunkte} Lebenspunkte.")
                 }
             }
@@ -93,15 +94,9 @@ class Krieger(
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
-                    held.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                } else {
-                    held.aktionspunkte = held.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                }
+                held.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
         }
@@ -130,7 +125,7 @@ class Krieger(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (verbuendeter.ruestungsPunkte - attacke.schaden > 0) {
+                if (verbuendeter.ruestungsPunkte - attacke.schaden >= 0) {
                     verbuendeter.ruestungsPunkte -= attacke.schaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
@@ -169,15 +164,9 @@ class Krieger(
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
-                    held.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                } else {
-                    held.aktionspunkte = held.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                }
+                held.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
         }

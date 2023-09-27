@@ -39,7 +39,7 @@ class Helfer(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (held.ruestungsPunkte - attacke.schaden > 0) {
+                if (held.ruestungsPunkte - attacke.schaden >= 0) {
                     held.ruestungsPunkte -= attacke.schaden
                     println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${held.name} hat jetzt noch ${held.ruestungsPunkte} Rüstung.")
@@ -63,15 +63,9 @@ class Helfer(
                 println("${gegner.name} hat jetzt ${gegner.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(gegner.aktionspunkte > gegner.aktionspunkte - attacke.aktionsPunkteKosten){
                     gegner.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
-                } else {
-                    gegner.aktionspunkte = gegner.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
-                }
             }
             aktionspunkteReichenAus = true
         }

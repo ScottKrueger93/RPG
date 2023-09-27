@@ -10,10 +10,10 @@ class Magier(
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
     ruestungsPunkte: Int = 200,
-    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 50, 50, 0, 0, 0),
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 100, 100, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
-    aktion3: Faehigkeit = Faehigkeit("Elementar-Schwert", 100, 100, 0, 0, 50),
-    aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 200, 200, 0, 0, 80),
+    aktion3: Faehigkeit = Faehigkeit("Elementar-Schwert", 250, 250, 0, 0, 50),
+    aktion4: Faehigkeit = Faehigkeit("Elementar-Schuss", 500, 500, 0, 0, 80),
     hatSchadenUeberZeitMalus: Boolean = false,
 ) : Held(
     name,
@@ -54,7 +54,7 @@ class Magier(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (gegner.ruestungsPunkte - attacke.schaden > 0) {
+                if (gegner.ruestungsPunkte - attacke.schaden >= 0) {
                     gegner.ruestungsPunkte -= attacke.schaden
                     println("${held.name} greift ${gegner.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${gegner.name} hat jetzt noch ${gegner.ruestungsPunkte} Rüstung.")
@@ -78,15 +78,9 @@ class Magier(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
                     held.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                } else {
-                    held.aktionspunkte = held.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                }
             }
             aktionspunkteReichenAus = true
         }
@@ -115,7 +109,7 @@ class Magier(
                 continue
             }
             if (attacke.schaden > 0) {
-                if (verbuendeter.ruestungsPunkte - attacke.schaden > 0) {
+                if (verbuendeter.ruestungsPunkte - attacke.schaden >= 0) {
                     verbuendeter.ruestungsPunkte -= attacke.schaden
                     println("${held.name} greift ${verbuendeter.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${verbuendeter.name} hat jetzt noch ${verbuendeter.ruestungsPunkte} Rüstung.")
@@ -140,15 +134,9 @@ class Magier(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(held.aktionspunkte > held.aktionspunkte - attacke.aktionsPunkteKosten){
                     held.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                } else {
-                    held.aktionspunkte = held.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
-                }
             }
             aktionspunkteReichenAus = true
         }

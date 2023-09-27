@@ -67,7 +67,7 @@ class Endgegner(
             if (attacke.schaden > 0) {
                 if (attacke.name == "Schatten-Miasma") {
                     flaechenAngriff(attacke, gegner, hatBereitsGekaempftListe)
-                } else if (held.ruestungsPunkte - attacke.schaden > 0) {
+                } else if (held.ruestungsPunkte - attacke.schaden >= 0) {
                     held.ruestungsPunkte -= attacke.schaden
                     println("${gegner.name} greift ${held.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                     println("${held.name} hat jetzt noch ${held.ruestungsPunkte} Rüstung.")
@@ -93,15 +93,9 @@ class Endgegner(
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                if(gegner.aktionspunkte > gegner.aktionspunkte - attacke.aktionsPunkteKosten){
                     gegner.aktionspunkte -= attacke.aktionsPunkteKosten
                     println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
                     println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
-                } else {
-                    gegner.aktionspunkte = gegner.standardAktionspunkte
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
-                }
             }
             aktionspunkteReichenAus = true
             gegner.hatSpott = false
@@ -110,7 +104,7 @@ class Endgegner(
 
     private fun flaechenAngriff(attacke: Faehigkeit, gegner: Gegner, hatBereitsGekaempftListe: MutableList<Held>) {
         for (heldVonFlaechenangriffGetroffen in hatBereitsGekaempftListe) {
-            if (heldVonFlaechenangriffGetroffen.ruestungsPunkte - attacke.schaden > 0) {
+            if (heldVonFlaechenangriffGetroffen.ruestungsPunkte - attacke.schaden >= 0) {
                 heldVonFlaechenangriffGetroffen.ruestungsPunkte -= attacke.schaden
                 println("${gegner.name} greift ${heldVonFlaechenangriffGetroffen.name} mit ${attacke.name} an und verursacht ${attacke.schaden} Schaden.")
                 println("${heldVonFlaechenangriffGetroffen.name} hat jetzt noch ${heldVonFlaechenangriffGetroffen.ruestungsPunkte} Rüstung.")
