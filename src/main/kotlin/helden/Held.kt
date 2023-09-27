@@ -276,7 +276,12 @@ open class Held(
         }
     }
 
-    open fun angreifenHeilerVerbuendeter(held: Held, verbuendeter: Held, heldIstTot: MutableList<Held>, hatBereitsGekaempftListe: MutableList<Held>) {
+    open fun angreifenHeilerVerbuendeter(
+        held: Held,
+        verbuendeter: Held,
+        heldIstTot: MutableList<Held>,
+        hatBereitsGekaempftListe: MutableList<Held>,
+    ) {
 
         println("Welche Fähigkeit von ${held.name} möchtest du ausführen?")
         for ((index, attacken) in attackenListe.withIndex()) {

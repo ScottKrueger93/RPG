@@ -15,7 +15,7 @@ class Endgegner(
     aktion4: Faehigkeit = Faehigkeit("Verseuchung", 0, 0, 0, 0, 50),
     aktion5: Faehigkeit = Faehigkeit("Schattenblitz", 350, 350, 0, 0, 30),
     aktion6: Faehigkeit = Faehigkeit("Monströsität beschwören", 0, 0, 0, 0, 0),
-    hatSpott: Boolean = false
+    hatSpott: Boolean = false,
 ) : Gegner(
     name,
     lebenspunkte,
@@ -93,9 +93,9 @@ class Endgegner(
                 }
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                    gegner.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
+                gegner.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${gegner.name} hat jetzt noch ${gegner.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
             gegner.hatSpott = false
@@ -119,7 +119,12 @@ class Endgegner(
         }
     }
 
-    private fun helferBeschwoeren(attacke: Faehigkeit, gegner: Gegner, helfer: Helfer, gegnerList: MutableList<Gegner>) {
+    private fun helferBeschwoeren(
+        attacke: Faehigkeit,
+        gegner: Gegner,
+        helfer: Helfer,
+        gegnerList: MutableList<Gegner>,
+    ) {
         println("${gegner.name} setzt ${attacke.name} ein und beschwört eine ${helfer.name}.")
         gegnerList.add(helfer)
     }

@@ -44,7 +44,7 @@ class Magier(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
                 println("Ungültige Eingabe.")
                 angreifenMagierGegner(held, gegner)
             }
@@ -78,9 +78,9 @@ class Magier(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                    held.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                held.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
         }
@@ -99,7 +99,7 @@ class Magier(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
                 println("Ungültige Eingabe.")
                 angreifenMagierVerbuendeter(held, verbuendeter)
             }
@@ -134,9 +134,9 @@ class Magier(
                 println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
             }
             if (attacke.aktionsPunkteKosten > 0) {
-                    held.aktionspunkte -= attacke.aktionsPunkteKosten
-                    println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
-                    println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
+                held.aktionspunkte -= attacke.aktionsPunkteKosten
+                println("Diese Fähigkeit hat ${attacke.aktionsPunkteKosten} AP gekostet.")
+                println("${held.name} hat jetzt noch ${held.aktionspunkte} AP. ")
             }
             aktionspunkteReichenAus = true
         }

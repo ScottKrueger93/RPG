@@ -10,7 +10,7 @@ class Krieger(
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
     ruestungsPunkte: Int = 500,
-    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 150, 1000, 0, 0, 0),
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 150, 150, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Spott", 0, 0, 0, 150, 50),
     aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 0, 250, 50),
@@ -44,7 +44,7 @@ class Krieger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
                 println("Ungültige Eingabe.")
                 angreifenKriegerGegner(held, gegner)
             }
@@ -81,11 +81,13 @@ class Krieger(
                         println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                         println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
                     }
+
                     "Schützendes Schild" -> {
                         held.ruestungsPunkte += attacke.ruestungPlus
                         println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                         println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
                     }
+
                     else -> {
                         held.ruestungsPunkte += attacke.ruestungPlus
                         println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
@@ -115,7 +117,7 @@ class Krieger(
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
             val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4){
+            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
                 println("Ungültige Eingabe.")
                 angreifenKriegerVerbuendeter(held, verbuendeter)
             }
@@ -151,11 +153,13 @@ class Krieger(
                         println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                         println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
                     }
+
                     "Schützendes Schild" -> {
                         held.ruestungsPunkte += attacke.ruestungPlus
                         println("${held.name} hebt sein Turmschild und geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")
                         println("${held.name} hat jetzt ${held.ruestungsPunkte} Rüstung.")
                     }
+
                     else -> {
                         held.ruestungsPunkte += attacke.ruestungPlus
                         println("${held.name} geht in Verteidigungsposition und erhält ${attacke.ruestungPlus} Rüstung hinzu.")

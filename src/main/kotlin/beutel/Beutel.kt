@@ -46,26 +46,22 @@ class Beutel(
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
-        }
-        else if (items.size < 3) {
+        } else if (items.size < 3) {
             if (itemEingabe != 1 && itemEingabe != 2) {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
-        }
-        else if (items.size < 4) {
+        } else if (items.size < 4) {
             if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3) {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
-        }
-        else if (items.size < 5) {
+        } else if (items.size < 5) {
             if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3 && itemEingabe != 4) {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
-        }
-        else if (items.size < 6) {
+        } else if (items.size < 6) {
             if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3 && itemEingabe != 4 && itemEingabe != 5) {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
