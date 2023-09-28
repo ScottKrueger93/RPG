@@ -10,7 +10,7 @@ class Krieger(
     aktionspunkte: Int = 100,
     standardAktionspunkte: Int = 100,
     ruestungsPunkte: Int = 500,
-    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 150, 150, 0, 0, 0),
+    aktion1: Faehigkeit = Faehigkeit("Normaler Angriff", 150, 5000, 0, 0, 0),
     aktion2: Faehigkeit = Faehigkeit("Verteidigungshaltung", 0, 0, 0, 50, 0),
     aktion3: Faehigkeit = Faehigkeit("Spott", 0, 0, 0, 150, 50),
     aktion4: Faehigkeit = Faehigkeit("Schützendes Schild", 0, 0, 0, 250, 50),
@@ -43,12 +43,26 @@ class Krieger(
         }
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
-            val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
+            val attackenEingabe: String = readln()
+            if (attackenEingabe != "1" && attackenEingabe != "2" && attackenEingabe != "3" && attackenEingabe != "4") {
                 println("Ungültige Eingabe.")
                 angreifenKriegerGegner(held, gegner)
             }
-            val attacke = attackenListe[attackenEingabe - 1]
+            var attacke = attackenListe[0]
+            when (attackenEingabe) {
+                "1" -> {
+                    attacke = attackenListe[0]
+                }
+                "2" -> {
+                    attacke = attackenListe[1]
+                }
+                "3" -> {
+                    attacke = attackenListe[2]
+                }
+                "4" -> {
+                    attacke = attackenListe[3]
+                }
+            }
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue
@@ -116,12 +130,26 @@ class Krieger(
         }
         var aktionspunkteReichenAus = false
         while (!aktionspunkteReichenAus) {
-            val attackenEingabe: Int = readln().toInt()
-            if (attackenEingabe != 1 && attackenEingabe != 2 && attackenEingabe != 3 && attackenEingabe != 4) {
+            val attackenEingabe: String = readln()
+            if (attackenEingabe != "1" && attackenEingabe != "2" && attackenEingabe != "3" && attackenEingabe != "4") {
                 println("Ungültige Eingabe.")
                 angreifenKriegerVerbuendeter(held, verbuendeter)
             }
-            val attacke = attackenListe[attackenEingabe - 1]
+            var attacke = attackenListe[0]
+            when (attackenEingabe) {
+                "1" -> {
+                    attacke = attackenListe[0]
+                }
+                "2" -> {
+                    attacke = attackenListe[1]
+                }
+                "3" -> {
+                    attacke = attackenListe[2]
+                }
+                "4" -> {
+                    attacke = attackenListe[3]
+                }
+            }
             if (attacke.aktionsPunkteKosten > held.aktionspunkte) {
                 println("Der Held hat nicht genug AP für diese Fähigkeit.")
                 continue

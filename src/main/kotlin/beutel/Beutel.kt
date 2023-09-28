@@ -29,7 +29,7 @@ class Beutel(
         }
     }
 
-    fun itemAuswaehlen(): Item {
+    fun itemAuswaehlen(): Item? {
         itemBeschreibung()
         println()
         println("Welches Item möchtest du verwenden?")
@@ -40,35 +40,52 @@ class Beutel(
             """.trimIndent()
             )
         }
-        val itemEingabe: Int = readln().toInt()
+        val itemEingabe = readln()
         if (items.size < 2) {
-            if (itemEingabe != 1) {
+            if (itemEingabe != "1") {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
         } else if (items.size < 3) {
-            if (itemEingabe != 1 && itemEingabe != 2) {
+            if (itemEingabe != "1" && itemEingabe != "2") {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
         } else if (items.size < 4) {
-            if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3) {
+            if (itemEingabe != "1" && itemEingabe != "2" && itemEingabe != "3") {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
         } else if (items.size < 5) {
-            if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3 && itemEingabe != 4) {
+            if (itemEingabe != "1" && itemEingabe != "2" && itemEingabe != "3" && itemEingabe != "4") {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
         } else if (items.size < 6) {
-            if (itemEingabe != 1 && itemEingabe != 2 && itemEingabe != 3 && itemEingabe != 4 && itemEingabe != 5) {
+            if (itemEingabe != "1" && itemEingabe != "2" && itemEingabe != "3" && itemEingabe != "4" && itemEingabe != "5") {
                 println("Ungültige Eingabe.")
                 return itemAuswaehlen()
             }
         }
         println()
-        val item = items[itemEingabe - 1]
+        var item: Item? = null
+        when (itemEingabe) {
+            "1" -> {
+                item = items[0]
+            }
+            "2" -> {
+                item = items[1]
+            }
+            "3" -> {
+                item = items[2]
+            }
+            "4" -> {
+                item = items[3]
+            }
+            "5" -> {
+                item = items[4]
+            }
+        }
         items.remove(item)
         return item
     }
